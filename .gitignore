@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -122,9 +123,38 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# エディタディレクトリとファイル
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Vite 特有の項目
+*.local
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# テストの副産物
+/cypress/videos/
+/cypress/screenshots/
+
+# ビルド成果物（既に含まれているかもしれませんが、明示的に指定）
+/dist
+/build
+
+# 一時ファイル
+*.tmp
+*.temp
