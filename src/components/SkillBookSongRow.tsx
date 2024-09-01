@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BaseSong } from '../types/song';
 import BaseSongRow from './BaseSongRow';
 
