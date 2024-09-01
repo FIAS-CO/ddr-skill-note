@@ -59,7 +59,7 @@ const PersonalSkillPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 pt-16">
       <h1 className="text-3xl font-bold mb-8">個人のフレアスキル帳 (デモ)</h1>
       <StatsOverview totalFlareSkill={totalFlareSkill} grade={stats.grade} />
       {renderCategoryTable('CLASSIC', classicSongs)}
