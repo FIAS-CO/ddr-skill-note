@@ -1,0 +1,62 @@
+{
+    "skill-book-songs": {
+        "CLASSIC": [
+            {
+                "id": 1,
+                "title": "CLASSIC曲1",
+                "level": 18,
+                "flareRank": "IX",
+                "score": 990000,
+                "flareSkill": 962
+            },
+            {
+                "id": 2,
+                "title": "CLASSIC曲2",
+                "level": 19,
+                "flareRank": "EX",
+                "score": 995000,
+                "flareSkill": 1064
+            }
+        ],
+        "WHITE": [
+            {
+                "id": 3,
+                "title": "WHITE曲1",
+                "level": 17,
+                "flareRank": "VIII",
+                "score": 985000,
+                "flareSkill": 939
+            },
+            {
+                "id": 4,
+                "title": "WHITE曲2",
+                "level": 18,
+                "flareRank": "IX",
+                "score": 992000,
+                "flareSkill": 962
+            }
+        ],
+        "GOLD": [
+            {
+                "id": 5,
+                "title": "GOLD曲1",
+                "level": 19,
+                "flareRank": "EX",
+                "score": 998000,
+                "flareSkill": 1064
+            },
+            {
+                "id": 6,
+                "title": "GOLD曲2",
+                "level": 18,
+                "flareRank": "IX",
+                "score": 991000,
+                "flareSkill": 962
+            }
+        ]
+    },
+    "skill-book-stats": {
+        "totalFlareSkill": 93792,
+        "grade": "WORLD"
+    }
+}

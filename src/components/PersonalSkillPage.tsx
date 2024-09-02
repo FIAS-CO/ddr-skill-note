@@ -3,35 +3,22 @@ import { useState, useEffect, useMemo } from 'react';
 import SongTable from './SongTable';
 import { SkillBookSong } from './SkillBookSongRow';
 import StatsOverview from './StatsOverview';
+import { getSkillBookSongs, getStats, CategorizedSongs, Stats } from '../services/api';
 
 const PersonalSkillPage: React.FC = () => {
-  const [stats, setStats] = useState({ grade: '' });
-  const [classicSongs, setClassicSongs] = useState<SkillBookSong[]>([]);
-  const [whiteSongs, setWhiteSongs] = useState<SkillBookSong[]>([]);
-  const [goldSongs, setGoldSongs] = useState<SkillBookSong[]>([]);
+  const [stats, setStats] = useState<Stats>({ totalFlareSkill: 0, grade: '' });
+  const [songs, setSongs] = useState<CategorizedSongs>({ CLASSIC: [], WHITE: [], GOLD: [] });
 
   useEffect(() => {
-    // TODO: Replace with actual API call
     const fetchData = async () => {
-      // Simulating API call
-      const mockStats = { grade: 'WORLD' };
-      const mockClassicSongs: SkillBookSong[] = [
-        { title: 'CLASSIC曲1', level: 18, flareRank: 'IX', score: 990000, flareSkill: 962 },
-        { title: 'CLASSIC曲2', level: 19, flareRank: 'EX', score: 995000, flareSkill: 1064 },
-      ];
-      const mockWhiteSongs: SkillBookSong[] = [
-        { title: 'WHITE曲1', level: 17, flareRank: 'VIII', score: 985000, flareSkill: 939 },
-        { title: 'WHITE曲2', level: 18, flareRank: 'IX', score: 992000, flareSkill: 962 },
-      ];
-      const mockGoldSongs: SkillBookSong[] = [
-        { title: 'GOLD曲1', level: 19, flareRank: 'EX', score: 998000, flareSkill: 1064 },
-        { title: 'GOLD曲2', level: 18, flareRank: 'IX', score: 991000, flareSkill: 962 },
-      ];
-
-      setStats(mockStats);
-      setClassicSongs(mockClassicSongs);
-      setWhiteSongs(mockWhiteSongs);
-      setGoldSongs(mockGoldSongs);
+      try {
+        const [songsData, statsData] = await Promise.all([getSkillBookSongs(), getStats()]);
+        setSongs(songsData);
+        setStats(statsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // エラーハンドリングをここに追加
+      }
     };
 
     fetchData();
@@ -41,19 +28,14 @@ const PersonalSkillPage: React.FC = () => {
     return songs.reduce((total, song) => total + song.flareSkill, 0);
   };
 
-  const totalFlareSkill = useMemo(() => {
-    return calculateTotalFlareSkill(classicSongs) + 
-           calculateTotalFlareSkill(whiteSongs) + 
-           calculateTotalFlareSkill(goldSongs);
-  }, [classicSongs, whiteSongs, goldSongs]);
-
-  const renderCategoryTable = (category: string, songs: SkillBookSong[]) => {
-    const categoryTotalFlareSkill = calculateTotalFlareSkill(songs);
+  const renderCategoryTable = (category: keyof CategorizedSongs) => {
+    const categorySongs = songs[category];
+    const categoryTotalFlareSkill = categorySongs.reduce((total, song) => total + song.flareSkill, 0);
 
     return (
       <div key={category} className="mb-8">
         <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
-        <SongTable songs={songs} type="skillbook" />
+        <SongTable songs={categorySongs} type="skillbook" />
       </div>
     );
   };
@@ -61,10 +43,10 @@ const PersonalSkillPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8 pt-16">
       <h1 className="text-3xl font-bold mb-8">個人のフレアスキル帳 (デモ)</h1>
-      <StatsOverview totalFlareSkill={totalFlareSkill} grade={stats.grade} />
-      {renderCategoryTable('CLASSIC', classicSongs)}
-      {renderCategoryTable('WHITE', whiteSongs)}
-      {renderCategoryTable('GOLD', goldSongs)}
+      <StatsOverview totalFlareSkill={stats.totalFlareSkill} grade={stats.grade} />
+      {renderCategoryTable('CLASSIC')}
+      {renderCategoryTable('WHITE')}
+      {renderCategoryTable('GOLD')}
     </div>
   );
 };
