@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
             <Link to="/" className="text-white hover:text-gray-300">Top</Link>
           </li>
           <li>
-            <Link to="/personal-skill" className="text-white hover:text-gray-300">Song Ranking</Link>
+            <Link to="/song-ranking" className="text-white hover:text-gray-300">Song Ranking</Link>
           </li>
         </ul>
       </div>
