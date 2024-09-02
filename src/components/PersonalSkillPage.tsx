@@ -65,7 +65,6 @@ const PersonalSkillPage: React.FC = () => {
       {renderCategoryTable('CLASSIC', classicSongs)}
       {renderCategoryTable('WHITE', whiteSongs)}
       {renderCategoryTable('GOLD', goldSongs)}
-      <a href="#" className="text-blue-600 hover:underline">ランキングページへ戻る</a>
     </div>
   );
 };
