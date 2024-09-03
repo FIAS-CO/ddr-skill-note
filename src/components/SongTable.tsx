@@ -37,7 +37,6 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
   };
 
   const getSortValue = (song: RankingSong | SkillBookSong, key: SortKey): any => {
-    console.log('Sorting by key:', key, 'Song:', JSON.stringify(song)); // オブジェクトの完全な内容をログ出力
     switch (key) {
       case 'flareRank':
         return flareRankOrder.indexOf(song.flareRank);

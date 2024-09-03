@@ -4,20 +4,27 @@ import SongTable from "./SongTable";
 import { getRankingSongs, RankingSongs } from '../services/api';
 import Tab from './Tab';
 
+interface AllRankingSongs {
+  [grade: string]: {
+    SP: RankingSongs;
+    DP: RankingSongs;
+  };
+}
+
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('WORLD');
-  const [popularSongs, setPopularSongs] = useState<{ SP: RankingSongs; DP: RankingSongs }>({ SP: { CLASSIC: [], WHITE: [], GOLD: [] }, DP: { CLASSIC: [], WHITE: [], GOLD: [] } });
+  const [allPopularSongs, setAllPopularSongs] = useState<AllRankingSongs | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
 
   useEffect(() => {
-    const fetchPopularSongs = async () => {
+    const fetchAllPopularSongs = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await getRankingSongs(selectedGrade);
-        setPopularSongs(data);
+        const data = await getRankingSongs();
+        setAllPopularSongs(data);
       } catch (err) {
         setError('Failed to fetch ranking songs. Please try again later.');
         console.error('Error fetching ranking songs:', err);
@@ -26,8 +33,15 @@ const SongRankingPage: React.FC = () => {
       }
     };
 
-    fetchPopularSongs();
-  }, [selectedGrade]);
+    fetchAllPopularSongs();
+  }, []);
+
+  const currentPopularSongs = useMemo(() => {
+    if (allPopularSongs && allPopularSongs[selectedGrade]) {
+      return allPopularSongs[selectedGrade];
+    }
+    return { SP: { CLASSIC: [], WHITE: [], GOLD: [] }, DP: { CLASSIC: [], WHITE: [], GOLD: [] } };
+  }, [allPopularSongs, selectedGrade]);
 
   const handleGradeChange = (grade: string) => {
     setSelectedGrade(grade);
@@ -50,7 +64,7 @@ const SongRankingPage: React.FC = () => {
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
       />
       {['CLASSIC', 'WHITE', 'GOLD'].map((category) => {
-        const songs = popularSongs[activeTab][category as keyof RankingSongs];
+        const songs = currentPopularSongs[activeTab][category as keyof RankingSongs];
         if (!songs || songs.length === 0) {
           return (
             <div key={category} className="mb-8">
