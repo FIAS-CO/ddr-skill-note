@@ -2,126 +2,254 @@
     "users": {
         "user1": {
             "skill-book-songs": {
-                "CLASSIC": [
-                    {
-                        "id": 1,
-                        "title": "CLASSIC曲1a",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 990000,
-                        "flareSkill": 962
-                    },
-                    {
-                        "id": 2,
-                        "title": "CLASSIC曲2a",
-                        "level": 19,
-                        "flareRank": "EX",
-                        "score": 995000,
-                        "flareSkill": 1064
-                    }
-                ],
-                "WHITE": [
-                    {
-                        "id": 3,
-                        "title": "WHITE曲1a",
-                        "level": 17,
-                        "flareRank": "VIII",
-                        "score": 985000,
-                        "flareSkill": 939
-                    },
-                    {
-                        "id": 4,
-                        "title": "WHITE曲2a",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 992000,
-                        "flareSkill": 962
-                    }
-                ],
-                "GOLD": [
-                    {
-                        "id": 5,
-                        "title": "GOLD曲1a",
-                        "level": 19,
-                        "flareRank": "EX",
-                        "score": 998000,
-                        "flareSkill": 1064
-                    },
-                    {
-                        "id": 6,
-                        "title": "GOLD曲2a",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 991000,
-                        "flareSkill": 962
-                    }
-                ]
+                "SP": {
+                    "CLASSIC": [
+                        {
+                            "id": 1,
+                            "title": "CLASSIC曲1a",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 990000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 2,
+                            "title": "CLASSIC曲2a",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 995000,
+                            "flareSkill": 1064
+                        }
+                    ],
+                    "WHITE": [
+                        {
+                            "id": 3,
+                            "title": "WHITE曲1a",
+                            "level": 17,
+                            "flareRank": "VIII",
+                            "score": 985000,
+                            "flareSkill": 939
+                        },
+                        {
+                            "id": 4,
+                            "title": "WHITE曲2a",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 992000,
+                            "flareSkill": 962
+                        }
+                    ],
+                    "GOLD": [
+                        {
+                            "id": 5,
+                            "title": "GOLD曲1a",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 998000,
+                            "flareSkill": 1064
+                        },
+                        {
+                            "id": 6,
+                            "title": "GOLD曲2a",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 991000,
+                            "flareSkill": 962
+                        }
+                    ]
+                },
+                "DP": {
+                    "CLASSIC": [
+                        {
+                            "id": 1,
+                            "title": "CLASSIC曲1ad",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 990000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 2,
+                            "title": "CLASSIC曲2ad",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 995000,
+                            "flareSkill": 1064
+                        }
+                    ],
+                    "WHITE": [
+                        {
+                            "id": 3,
+                            "title": "WHITE曲1ad",
+                            "level": 17,
+                            "flareRank": "VIII",
+                            "score": 985000,
+                            "flareSkill": 939
+                        },
+                        {
+                            "id": 4,
+                            "title": "WHITE曲2ad",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 992000,
+                            "flareSkill": 962
+                        }
+                    ],
+                    "GOLD": [
+                        {
+                            "id": 5,
+                            "title": "GOLD曲1ad",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 998000,
+                            "flareSkill": 1064
+                        },
+                        {
+                            "id": 6,
+                            "title": "GOLD曲2ad",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 991000,
+                            "flareSkill": 962
+                        }
+                    ]
+                }
             },
             "skill-book-stats": {
-                "totalFlareSkill": 93792,
-                "grade": "WORLD"
+                "SP": {
+                    "totalFlareSkill": 93792,
+                    "grade": "WORLD"
+                },
+                "DP": {
+                    "totalFlareSkill": 85000,
+                    "grade": "SUN+++"
+                }
             }
         },
         "user2": {
             "skill-book-songs": {
-                "CLASSIC": [
-                    {
-                        "id": 1,
-                        "title": "CLASSIC曲A",
-                        "level": 17,
-                        "flareRank": "VIII",
-                        "score": 980000,
-                        "flareSkill": 939
-                    },
-                    {
-                        "id": 2,
-                        "title": "CLASSIC曲B",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 985000,
-                        "flareSkill": 962
-                    }
-                ],
-                "WHITE": [
-                    {
-                        "id": 3,
-                        "title": "WHITE曲A",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 990000,
-                        "flareSkill": 962
-                    },
-                    {
-                        "id": 4,
-                        "title": "WHITE曲B",
-                        "level": 19,
-                        "flareRank": "EX",
-                        "score": 995000,
-                        "flareSkill": 1064
-                    }
-                ],
-                "GOLD": [
-                    {
-                        "id": 5,
-                        "title": "GOLD曲A",
-                        "level": 18,
-                        "flareRank": "IX",
-                        "score": 988000,
-                        "flareSkill": 962
-                    },
-                    {
-                        "id": 6,
-                        "title": "GOLD曲B",
-                        "level": 19,
-                        "flareRank": "EX",
-                        "score": 992000,
-                        "flareSkill": 1064
-                    }
-                ]
+                "SP": {
+                    "CLASSIC": [
+                        {
+                            "id": 1,
+                            "title": "CLASSIC曲A",
+                            "level": 17,
+                            "flareRank": "VIII",
+                            "score": 980000,
+                            "flareSkill": 939
+                        },
+                        {
+                            "id": 2,
+                            "title": "CLASSIC曲B",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 985000,
+                            "flareSkill": 962
+                        }
+                    ],
+                    "WHITE": [
+                        {
+                            "id": 3,
+                            "title": "WHITE曲A",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 990000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 4,
+                            "title": "WHITE曲B",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 995000,
+                            "flareSkill": 1064
+                        }
+                    ],
+                    "GOLD": [
+                        {
+                            "id": 5,
+                            "title": "GOLD曲A",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 988000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 6,
+                            "title": "GOLD曲B",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 992000,
+                            "flareSkill": 1064
+                        }
+                    ]
+                },
+                "DP": {
+                    "CLASSIC": [
+                        {
+                            "id": 1,
+                            "title": "CLASSIC曲Ad",
+                            "level": 17,
+                            "flareRank": "VIII",
+                            "score": 980000,
+                            "flareSkill": 939
+                        },
+                        {
+                            "id": 2,
+                            "title": "CLASSIC曲Bd",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 985000,
+                            "flareSkill": 962
+                        }
+                    ],
+                    "WHITE": [
+                        {
+                            "id": 3,
+                            "title": "WHITE曲Ad",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 990000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 4,
+                            "title": "WHITE曲Bd",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 995000,
+                            "flareSkill": 1064
+                        }
+                    ],
+                    "GOLD": [
+                        {
+                            "id": 5,
+                            "title": "GOLD曲Ad",
+                            "level": 18,
+                            "flareRank": "IX",
+                            "score": 988000,
+                            "flareSkill": 962
+                        },
+                        {
+                            "id": 6,
+                            "title": "GOLD曲Bd",
+                            "level": 19,
+                            "flareRank": "EX",
+                            "score": 992000,
+                            "flareSkill": 1064
+                        }
+                    ]
+                }
             },
             "skill-book-stats": {
-                "totalFlareSkill": 85000,
-                "grade": "SUN+++"
+                "SP": {
+                    "totalFlareSkill": 85000,
+                    "grade": "SUN+++"
+                },
+                "DP": {
+                    "totalFlareSkill": 80000,
+                    "grade": "SUN++"
+                }
             }
         }
     },

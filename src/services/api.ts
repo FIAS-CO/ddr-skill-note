@@ -9,10 +9,20 @@ export interface Stats {
     grade: string;
 }
 
-export interface CategorizedSongs {
+export interface PlayStyle {
     CLASSIC: SkillBookSong[];
     WHITE: SkillBookSong[];
     GOLD: SkillBookSong[];
+}
+
+export interface PlayerStats {
+    SP: Stats;
+    DP: Stats;
+}
+
+export interface CategorizedSongs {
+    SP: PlayStyle;
+    DP: PlayStyle;
 }
 
 export interface RankingSongs {
@@ -30,10 +40,11 @@ export const getSkillBookSongs = async (userId: string): Promise<CategorizedSong
     return response.data;
 };
 
-export const getStats = async (userId: string): Promise<Stats> => {
-    const response = await api.get<Stats>(`/users/${userId}/skill-book-stats`);
+export const getStats = async (userId: string): Promise<PlayerStats> => {
+    const response = await api.get<PlayerStats>(`/users/${userId}/skill-book-stats`);
     return response.data;
 };
+
 export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
     try {
         const response = await api.get<{ [grade: string]: RankingSongs }>(`/ranking-songs`);
@@ -49,6 +60,5 @@ export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
         throw error;
     }
 };
-
 
 export default api;

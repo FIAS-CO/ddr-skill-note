@@ -1,66 +1,87 @@
 import * as React from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import SongTable from './SongTable';
-import { SkillBookSong } from './SkillBookSongRow';
 import StatsOverview from './StatsOverview';
-import { getSkillBookSongs, getStats, CategorizedSongs, Stats } from '../services/api';
-import { useNavigate, useParams } from 'react-router-dom';
+import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle } from '../services/api';
+import { useParams } from 'react-router-dom';
+import Tab from './Tab';
 
 const PersonalSkillPage: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  const navigate = useNavigate();
-  const [stats, setStats] = useState<Stats>({ totalFlareSkill: 0, grade: '' });
-  const [songs, setSongs] = useState<CategorizedSongs>({ CLASSIC: [], WHITE: [], GOLD: [] });
+  const [stats, setStats] = useState<PlayerStats | null>(null);
+  const [songs, setSongs] = useState<CategorizedSongs | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
 
   useEffect(() => {
     const fetchData = async () => {
       if (!userId) {
-        return (<h1 className="text-3xl font-bold mb-8">No User(id:{userId} found.</h1>);
+        setError('ユーザーIDが提供されていません');
+        setIsLoading(false);
+        return;
       }
-
       setIsLoading(true);
       setError(null);
-
       try {
         const [songsData, statsData] = await Promise.all([getSkillBookSongs(userId), getStats(userId)]);
+        console.log('Fetched songs data:', songsData);
+        console.log('Fetched stats data:', statsData);
         setSongs(songsData);
         setStats(statsData);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Failed to load user data. Please try again later.');
+        console.error('データの取得中にエラーが発生しました:', error);
+        setError('ユーザーデータの読み込みに失敗しました。後でもう一度お試しください。');
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchData();
-  }, []);
+  }, [userId]);
 
-  const calculateTotalFlareSkill = (songs: SkillBookSong[]): number => {
-    return songs.reduce((total, song) => total + song.flareSkill, 0);
-  };
-
-  const renderCategoryTable = (category: keyof CategorizedSongs) => {
-    const categorySongs = songs[category];
+  const renderCategoryTable = (category: keyof PlayStyle, playStyle: 'SP' | 'DP') => {
+    if (!songs || !songs[playStyle] || !songs[playStyle][category]) {
+      return <div>この{category}カテゴリーにはデータがありません。</div>;
+    }
+    const categorySongs = songs[playStyle][category];
     const categoryTotalFlareSkill = categorySongs.reduce((total, song) => total + song.flareSkill, 0);
-
     return (
-      <div key={category} className="mb-8">
+      <div key={`${playStyle}-${category}`} className="mb-8">
         <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
         <SongTable songs={categorySongs} type="skillbook" />
       </div>
     );
   };
 
+  if (isLoading) {
+    return <div>データを読み込んでいます...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
+  if (!stats || !songs) {
+    return <div>データが利用できません。</div>;
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 pt-16">
       <h1 className="text-3xl font-bold mb-8">個人のフレアスキル帳 - ユーザーID: {userId}</h1>
-      <StatsOverview totalFlareSkill={stats.totalFlareSkill} grade={stats.grade} />
-      {renderCategoryTable('CLASSIC')}
-      {renderCategoryTable('WHITE')}
-      {renderCategoryTable('GOLD')}
+      <Tab
+        activeTab={activeTab}
+        onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
+      />
+      {stats[activeTab] && (
+        <StatsOverview
+          totalFlareSkill={stats[activeTab].totalFlareSkill}
+          grade={stats[activeTab].grade}
+          playStyle={activeTab}
+        />
+      )}
+      {renderCategoryTable('CLASSIC', activeTab)}
+      {renderCategoryTable('WHITE', activeTab)}
+      {renderCategoryTable('GOLD', activeTab)}
     </div>
   );
 };
