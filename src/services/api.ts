@@ -45,15 +45,18 @@ export const getStats = async (userId: string): Promise<PlayerStats> => {
     return response.data;
 };
 
-export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
+export const getRankingSongs = async (grade: string): Promise<{ SP: RankingSongs; DP: RankingSongs }> => {
     try {
-        const response = await api.get<{ [grade: string]: RankingSongs }>(`/ranking-songs`);
+        const response = await api.get<{ [grade: string]: { SP: RankingSongs; DP: RankingSongs } }>(`/ranking-songs`);
         console.log('API Response:', response.data); // デバッグ用ログ
         if (response.data && response.data[grade]) {
             return response.data[grade];
         } else {
             console.error(`No data found for grade: ${grade}`);
-            return { CLASSIC: [], WHITE: [], GOLD: [] };
+            return {
+                SP: { CLASSIC: [], WHITE: [], GOLD: [] },
+                DP: { CLASSIC: [], WHITE: [], GOLD: [] }
+            };
         }
     } catch (error) {
         console.error('Error fetching ranking songs:', error);

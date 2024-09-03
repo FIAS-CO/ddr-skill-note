@@ -255,186 +255,316 @@
     },
     "ranking-songs": {
         "WORLD": {
-            "CLASSIC": [
-                {
-                    "title": "CLASSIC難曲A",
-                    "level": 18,
-                    "flareRank": "EX",
-                    "overallPercentage": 20
-                },
-                {
-                    "title": "CLASSIC難曲B",
-                    "level": 19,
-                    "flareRank": "IX",
-                    "overallPercentage": 18
-                }
-            ],
-            "WHITE": [
-                {
-                    "title": "WHITE難曲A",
-                    "level": 19,
-                    "flareRank": "EX",
-                    "overallPercentage": 22
-                },
-                {
-                    "title": "WHITE難曲B",
-                    "level": 20,
-                    "flareRank": "IX",
-                    "overallPercentage": 19
-                }
-            ],
-            "GOLD": [
-                {
-                    "title": "GOLD超難曲A",
-                    "level": 20,
-                    "flareRank": "EX",
-                    "overallPercentage": 24
-                },
-                {
-                    "title": "GOLD超難曲B",
-                    "level": 21,
-                    "flareRank": "IX",
-                    "overallPercentage": 21
-                }
-            ]
+            "SP": {
+                "CLASSIC": [
+                    {
+                        "title": "CLASSIC難曲A",
+                        "level": 18,
+                        "flareRank": "EX",
+                        "overallPercentage": 20
+                    },
+                    {
+                        "title": "CLASSIC難曲B",
+                        "level": 19,
+                        "flareRank": "IX",
+                        "overallPercentage": 18
+                    }
+                ],
+                "WHITE": [
+                    {
+                        "title": "WHITE難曲A",
+                        "level": 19,
+                        "flareRank": "EX",
+                        "overallPercentage": 22
+                    },
+                    {
+                        "title": "WHITE難曲B",
+                        "level": 20,
+                        "flareRank": "IX",
+                        "overallPercentage": 19
+                    }
+                ],
+                "GOLD": [
+                    {
+                        "title": "GOLD超難曲A",
+                        "level": 20,
+                        "flareRank": "EX",
+                        "overallPercentage": 24
+                    },
+                    {
+                        "title": "GOLD超難曲B",
+                        "level": 21,
+                        "flareRank": "IX",
+                        "overallPercentage": 21
+                    }
+                ]
+            },
+            "DP": {
+                "CLASSIC": [
+                    {
+                        "title": "CLASSIC難曲Ad",
+                        "level": 18,
+                        "flareRank": "EX",
+                        "overallPercentage": 20
+                    },
+                    {
+                        "title": "CLASSIC難曲Bd",
+                        "level": 19,
+                        "flareRank": "IX",
+                        "overallPercentage": 18
+                    }
+                ],
+                "WHITE": [
+                    {
+                        "title": "WHITE難曲Ad",
+                        "level": 19,
+                        "flareRank": "EX",
+                        "overallPercentage": 22
+                    },
+                    {
+                        "title": "WHITE難曲Bd",
+                        "level": 20,
+                        "flareRank": "IX",
+                        "overallPercentage": 19
+                    }
+                ],
+                "GOLD": [
+                    {
+                        "title": "GOLD超難曲Ad",
+                        "level": 20,
+                        "flareRank": "EX",
+                        "overallPercentage": 24
+                    },
+                    {
+                        "title": "GOLD超難曲Bd",
+                        "level": 21,
+                        "flareRank": "IX",
+                        "overallPercentage": 21
+                    }
+                ]
+            }
         },
         "SUN+++": {
-            "CLASSIC": [
-                {
-                    "title": "CLASSIC SUN+++",
-                    "level": 18,
-                    "flareRank": "EX",
-                    "overallPercentage": 20
-                },
-                {
-                    "title": "CLASSIC SUN+++",
-                    "level": 19,
-                    "flareRank": "IX",
-                    "overallPercentage": 18
-                }
-            ],
-            "WHITE": [
-                {
-                    "title": "WHITE SUN+++",
-                    "level": 19,
-                    "flareRank": "EX",
-                    "overallPercentage": 22
-                },
-                {
-                    "title": "WHITE SUN+++",
-                    "level": 20,
-                    "flareRank": "IX",
-                    "overallPercentage": 19
-                }
-            ],
-            "GOLD": [
-                {
-                    "title": "GOLD SUN+++",
-                    "level": 20,
-                    "flareRank": "EX",
-                    "overallPercentage": 24
-                },
-                {
-                    "title": "GOLD SUN+++",
-                    "level": 21,
-                    "flareRank": "IX",
-                    "overallPercentage": 21
-                }
-            ]
+            "SP": {
+                "CLASSIC": [
+                    {
+                        "title": "CLASSIC SUN+++",
+                        "level": 18,
+                        "flareRank": "EX",
+                        "overallPercentage": 20
+                    },
+                    {
+                        "title": "CLASSIC SUN+++",
+                        "level": 19,
+                        "flareRank": "IX",
+                        "overallPercentage": 18
+                    }
+                ],
+                "WHITE": [
+                    {
+                        "title": "WHITE SUN+++",
+                        "level": 19,
+                        "flareRank": "EX",
+                        "overallPercentage": 22
+                    },
+                    {
+                        "title": "WHITE SUN+++",
+                        "level": 20,
+                        "flareRank": "IX",
+                        "overallPercentage": 19
+                    }
+                ],
+                "GOLD": [
+                    {
+                        "title": "GOLD SUN+++",
+                        "level": 20,
+                        "flareRank": "EX",
+                        "overallPercentage": 24
+                    },
+                    {
+                        "title": "GOLD SUN+++",
+                        "level": 21,
+                        "flareRank": "IX",
+                        "overallPercentage": 21
+                    }
+                ]
+            },
+            "DP": {
+                "CLASSIC": [
+                    {
+                        "title": "CLASSIC SUN+++d",
+                        "level": 18,
+                        "flareRank": "EX",
+                        "overallPercentage": 20
+                    },
+                    {
+                        "title": "CLASSIC SUN+++ d",
+                        "level": 19,
+                        "flareRank": "IX",
+                        "overallPercentage": 18
+                    }
+                ],
+                "WHITE": [
+                    {
+                        "title": "WHITE SUN+++d",
+                        "level": 19,
+                        "flareRank": "EX",
+                        "overallPercentage": 22
+                    },
+                    {
+                        "title": "WHITE SUN+++ d",
+                        "level": 20,
+                        "flareRank": "IX",
+                        "overallPercentage": 19
+                    }
+                ],
+                "GOLD": [
+                    {
+                        "title": "GOLD SUN+++ d",
+                        "level": 20,
+                        "flareRank": "EX",
+                        "overallPercentage": 24
+                    },
+                    {
+                        "title": "GOLD SUN+++ d",
+                        "level": 21,
+                        "flareRank": "IX",
+                        "overallPercentage": 21
+                    }
+                ]
+            }
         },
         "SUN++": {
-            "CLASSIC": [
-                {
-                    "title": "CLASSIC SUN++",
-                    "level": 18,
-                    "flareRank": "EX",
-                    "overallPercentage": 20
-                },
-                {
-                    "title": "CLASSIC SUN++",
-                    "level": 19,
-                    "flareRank": "IX",
-                    "overallPercentage": 18
-                }
-            ],
-            "WHITE": [
-                {
-                    "title": "WHITE SUN++",
-                    "level": 19,
-                    "flareRank": "EX",
-                    "overallPercentage": 22
-                },
-                {
-                    "title": "WHITE SUN++",
-                    "level": 20,
-                    "flareRank": "IX",
-                    "overallPercentage": 19
-                }
-            ],
-            "GOLD": [
-                {
-                    "title": "GOLD SUN++",
-                    "level": 20,
-                    "flareRank": "EX",
-                    "overallPercentage": 24
-                },
-                {
-                    "title": "GOLD SUN++",
-                    "level": 21,
-                    "flareRank": "IX",
-                    "overallPercentage": 21
-                }
-            ]
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "SUN+": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "SUN": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "NEPTUNE+++": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "NEPTUNE++": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "NEPTUNE+": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "NEPTUNE": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "URANUS+++": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "URANUS++": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "URANUS+": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         },
         "URANUS": {
-            "CLASSIC": [],
-            "WHITE": [],
-            "GOLD": []
+            "SP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            },
+            "DP": {
+                "CLASSIC": [],
+                "WHITE": [],
+                "GOLD": []
+            }
         }
     }
 }
