@@ -11,8 +11,8 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes>
-          <Route path="/" element={<PersonalSkillPage />} />
-          <Route path="/personal-skill" element={<PersonalSkillPage />} />
+          <Route path="/" element={<SongRankingPage />} />
+          <Route path="/personal-skill/:userId" element={<PersonalSkillPage />} />
           <Route path="/song-ranking" element={<SongRankingPage />} />
         </Routes>
       </div>

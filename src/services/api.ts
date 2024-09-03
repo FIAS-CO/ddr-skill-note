@@ -25,21 +25,20 @@ const api = axios.create({
     baseURL: API_BASE_URL,
 });
 
-export const getSkillBookSongs = async (): Promise<CategorizedSongs> => {
-    const response = await api.get<CategorizedSongs>('/skill-book-songs');
+export const getSkillBookSongs = async (userId: string): Promise<CategorizedSongs> => {
+    const response = await api.get<CategorizedSongs>(`/users/${userId}/skill-book-songs`);
     return response.data;
 };
 
-export const getStats = async (): Promise<Stats> => {
-    const response = await api.get<Stats>('/skill-book-stats');
+export const getStats = async (userId: string): Promise<Stats> => {
+    const response = await api.get<Stats>(`/users/${userId}/skill-book-stats`);
     return response.data;
 };
-
 export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
     try {
         const response = await api.get<{ [grade: string]: RankingSongs }>(`/ranking-songs`);
         console.log('API Response:', response.data); // デバッグ用ログ
-        if (response.data[grade]) {
+        if (response.data && response.data[grade]) {
             return response.data[grade];
         } else {
             console.error(`No data found for grade: ${grade}`);
