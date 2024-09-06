@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import PersonalSkillPage from './components/PersonalSkillPage';
 import './App.css';
 import SongRankingPage from './components/SongRankingPage';
+import HomePage from './components/HomePage';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes>
-          <Route path="/" element={<SongRankingPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/personal-skill/:userId" element={<PersonalSkillPage />} />
           <Route path="/song-ranking" element={<SongRankingPage />} />
         </Routes>

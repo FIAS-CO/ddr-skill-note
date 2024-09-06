@@ -566,5 +566,19 @@
                 "GOLD": []
             }
         }
-    }
+    },
+    "recent-users": [
+        {
+            "username": "user1",
+            "flareSkillSP": 90000,
+            "flareSkillDP": 80000,
+            "lastUpdated": "2024/09/03 22:23:33"
+        },
+        {
+            "username": "usre2",
+            "flareSkillSP": 80000,
+            "flareSkillDP": 70000,
+            "lastUpdated": "2024/09/03 22:23:33"
+        }
+    ]
 }

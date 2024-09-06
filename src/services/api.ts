@@ -56,4 +56,16 @@ export const getRankingSongs = async (): Promise<{ [grade: string]: { SP: Rankin
     }
 };
 
+export interface UserListItem {
+    username: string;
+    flareSkillSP: string;
+    flareSkillDP: string;
+    lastUpdated: string;
+}
+
+export const getRecentUsers = async (): Promise<UserListItem[]> => {
+    const response = await api.get<UserListItem[]>('/recent-users');
+    return response.data;
+};
+
 export default api;
