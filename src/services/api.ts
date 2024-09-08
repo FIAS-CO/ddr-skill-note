@@ -2,7 +2,8 @@ import axios from 'axios';
 import { SkillBookSong } from '../components/SkillBookSongRow';
 import { RankingSong } from '../components/RankingSongRow';
 
-const API_BASE_URL = 'http://localhost:3001';
+// TODO 本番URLと分岐させられるようにする
+const API_BASE_URL = 'http://localhost:3000';
 
 export interface Stats {
     totalFlareSkill: number;
@@ -57,14 +58,16 @@ export const getRankingSongs = async (): Promise<{ [grade: string]: { SP: Rankin
 };
 
 export interface UserListItem {
-    username: string;
-    flareSkillSP: string;
-    flareSkillDP: string;
-    lastUpdated: string;
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    totalFlareSkillSp: number;
+    totalFlareSkillDp: number;
 }
 
 export const getRecentUsers = async (): Promise<UserListItem[]> => {
-    const response = await api.get<UserListItem[]>('/recent-users');
+    const response = await api.get<UserListItem[]>('/api/recent_users');
     return response.data;
 };
 

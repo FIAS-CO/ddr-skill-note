@@ -78,15 +78,15 @@ const HomePage: React.FC = () => {
                                 <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                                     <td className="px-4 py-2">
                                         <Link
-                                            to={`/personal-skill/${user.username}`}
+                                            to={`/personal-skill/${user.name}`}
                                             className="text-blue-600 hover:text-blue-800 hover:underline"
                                         >
-                                            {user.username}
+                                            {user.name}
                                         </Link>
                                     </td>
-                                    <td className="px-4 py-2">{user.flareSkillSP}</td>
-                                    <td className="px-4 py-2">{user.flareSkillDP}</td>
-                                    <td className="px-4 py-2">{user.lastUpdated}</td>
+                                    <td className="px-4 py-2">{user.totalFlareSkillSp}</td>
+                                    <td className="px-4 py-2">{user.totalFlareSkillDp}</td>
+                                    <td className="px-4 py-2">{user.updatedAt}</td>
                                 </tr>
                             ))}
                         </tbody>
