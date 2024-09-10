@@ -13,7 +13,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/personal-skill/:userId" element={<PersonalSkillPage />} />
+          <Route path="/personal-skill/:userName" element={<PersonalSkillPage />} />
           <Route path="/song-ranking" element={<SongRankingPage />} />
         </Routes>
       </div>

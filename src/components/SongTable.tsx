@@ -19,7 +19,7 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
 
   const headers = type === 'ranking'
     ? ['Rank', 'Title', 'Level', 'Flare Rank', 'Overall %']
-    : ['Title', 'Level', 'Flare Rank', 'Score', 'Flare Skill'];
+    : ['', 'Title', 'Level', 'Flare Rank', 'Score', 'Flare Skill'];
 
   const getSortKey = (header: string): SortKey | null => {
     switch (header) {
@@ -64,14 +64,12 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
     const sorted = [...songs].sort((a, b) => {
       const valueA = getSortValue(a, sortKey);
       const valueB = getSortValue(b, sortKey);
-      console.log('Comparing:', valueA, valueB); // デバッグログ
 
       if (valueA < valueB) return sortDirection === 'asc' ? -1 : 1;
       if (valueA > valueB) return sortDirection === 'asc' ? 1 : -1;
       return 0;
     });
 
-    console.log('Sorted songs:', sorted.map(s => s.title)); // ソートされた曲のタイトルをログ出力
     setSortedSongs(sorted);
   }, [songs, sortKey, sortDirection]);
 
@@ -118,7 +116,7 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
                 {sortedSongs.map((song, index) => (
                   type === 'ranking'
                     ? <RankingSongRow key={index} song={song as RankingSong} rank={index + 1} />
-                    : <SkillBookSongRow key={index} song={song as SkillBookSong} />
+                    : <SkillBookSongRow key={index} song={song as SkillBookSong} ranking={index + 1} />
                 ))}
               </tbody>
             </table>

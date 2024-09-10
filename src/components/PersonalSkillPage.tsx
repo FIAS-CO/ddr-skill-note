@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import Tab from './Tab';
 
 const PersonalSkillPage: React.FC = () => {
-  const { userId } = useParams<{ userId: string }>();
+  const { userName } = useParams<{ userName: string }>();
   const [stats, setStats] = useState<PlayerStats | null>(null);
   const [songs, setSongs] = useState<CategorizedSongs | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +16,7 @@ const PersonalSkillPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!userId) {
+      if (!userName) {
         setError('ユーザーIDが提供されていません');
         setIsLoading(false);
         return;
@@ -24,9 +24,10 @@ const PersonalSkillPage: React.FC = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const [songsData, statsData] = await Promise.all([getSkillBookSongs(userId), getStats(userId)]);
+        const [songsData, statsData] = await Promise.all([getSkillBookSongs(userName), getStats(userName)]);
         console.log('Fetched songs data:', songsData);
         console.log('Fetched stats data:', statsData);
+
         setSongs(songsData);
         setStats(statsData);
       } catch (error) {
@@ -37,7 +38,7 @@ const PersonalSkillPage: React.FC = () => {
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userName]);
 
   const renderCategoryTable = (category: keyof PlayStyle, playStyle: 'SP' | 'DP') => {
     if (!songs || !songs[playStyle] || !songs[playStyle][category]) {
@@ -67,7 +68,7 @@ const PersonalSkillPage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 pt-16">
-      <h1 className="text-3xl font-bold mb-8">個人のフレアスキル帳 - ユーザーID: {userId}</h1>
+      <h1 className="text-3xl font-bold mb-8">{userName} さんのフレアスキル帳</h1>
       <Tab
         activeTab={activeTab}
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
