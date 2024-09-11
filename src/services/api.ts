@@ -56,9 +56,9 @@ export interface RankingSongs {
 }
 
 
-export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
+export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> => {
     try {
-        const response = await api.get<RankingSongs>(`/api/ranking-songs/${grade}`);
+        const response = await api.get<RankingSongsSpDp>(`/api/ranking-songs/${grade}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching ranking songs:', error);

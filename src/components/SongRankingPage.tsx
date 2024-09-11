@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import GradeSelector from "./RankingSelector";
 import SongTable from "./SongTable";
 import Tab from './Tab';
-import { getRankingSongs, RankingSongs } from '../services/api';
+import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('WORLD');
-  const [rankingSongs, setRankingSongs] = useState<RankingSongs | null>(null);
+  const [rankingSongs, setRankingSongs] = useState<RankingSongsSpDp | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
