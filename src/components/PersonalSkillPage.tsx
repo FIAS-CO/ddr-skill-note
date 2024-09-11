@@ -45,7 +45,12 @@ const PersonalSkillPage: React.FC = () => {
       return <div>この{category}カテゴリーにはデータがありません。</div>;
     }
     const categorySongs = songs[playStyle][category];
-    const categoryTotalFlareSkill = categorySongs.reduce((total, song) => total + song.flareSkill, 0);
+
+    const categoryTotalFlareSkill = categorySongs
+      .sort((a, b) => b.flareSkill - a.flareSkill) // flareSkillの降順でソート
+      .slice(0, 30) // 上位30曲を選択
+      .reduce((total, song) => total + song.flareSkill, 0); // 選択された曲のflareSkillを合計
+
     return (
       <div key={`${playStyle}-${category}`} className="mb-8">
         <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
