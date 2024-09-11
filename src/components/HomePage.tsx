@@ -7,7 +7,12 @@ const HomePage: React.FC = () => {
     const [recentUsers, setRecentUsers] = useState<UserListItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    function convertUTCtoJST(utcDateString: string): string {
+        const utcDate = new Date(utcDateString);
+        const jstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000)); // UTCに9時間を加算
 
+        return jstDate.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    }
     useEffect(() => {
         const fetchRecentUsers = async () => {
             try {
@@ -34,16 +39,21 @@ const HomePage: React.FC = () => {
 
     return (
         <div className="container mx-auto px-4 py-8 pt-16">
-            <h1 className="text-3xl font-bold mb-8">DDR フレアスキル一覧サイト</h1>
+            <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note</h1>
 
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
-                <p>Dance Dance Revolutionのフレアスキルの一覧を他のプレイヤーにシェアしたり、他のユーザーが対象にしている頻度が多い楽曲の情報を公開します。<br />データのアップロードはスマホアプリ"DDR Score Manager A"から行います。</p>
-
+                <p>Dance Dance Revolutionのファンサイトです。<br />
+                    自身のフレアスキル対象楽曲一覧を他のプレイヤーにシェアしたり、他のユーザーが対象にしている頻度が多い楽曲の情報を集計し公開します。<br />
+                    データのアップロードはスマホアプリ"DDR Score Manager A"から行います。(まだ未実装なのでちょっとまってね)<br /></p>
                 <div className="flex justify-around my-4">
                     <a href="#" className="bg-black text-white px-4 py-2 rounded">Android版ダウンロード</a>
                     <a href="#" className="bg-black text-white px-4 py-2 rounded">iOS版ダウンロード</a>
                 </div>
+                <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。バグがあったり、データが消えたりする可能性があります。大目に見てください。<br /></p>
+                <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re">@sig_re</a>)までご連絡ください。<br /><br />
+                    *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
+
             </section>
 
             <section className="mb-8">
@@ -51,13 +61,13 @@ const HomePage: React.FC = () => {
                 <p className="font-bold mb-2">※e-amusement ベーシックコース以上への加入が必要です。</p>
                 <ol className="list-decimal list-inside">
                     <li>ご利用のスマホでDDR Score Manager Aをインストールします</li>
-                    <li>「Gateから取得(通常)」を実行します</li>
+                    <li>右上のメニューから「Gateから取得(通常)」を実行します</li>
                     <li>ログイン画面が表示されたらご自身のアカウントでログインします</li>
                     <li>処理が完了するまでお待ち下さい</li>
-                    <li>「スキル帳へアップロード」を選択します</li>
-                    <li>ユーザー名を入力し、「アップロード」ボタンを押下します</li>
-                    <li>処理が完了するまでお待ち下さい</li>
-                    <li>画面に表示されるリンクからスキル帳にアクセスします</li>
+                    <li>右上のメニューから「フレアスキル帳」を選択します</li>
+                    <li>ユーザー名を入力し、「ユーザー登録」ボタンを押下します</li>
+                    <li>「楽曲データ送信」ボタンを押下します</li>
+                    <li>処理が完了しましたら、「スキル帳ページ」ボタンでサイトにアクセスしてください</li>
                 </ol>
             </section>
 
@@ -86,7 +96,7 @@ const HomePage: React.FC = () => {
                                     </td>
                                     <td className="px-4 py-2">{user.totalFlareSkillSp}</td>
                                     <td className="px-4 py-2">{user.totalFlareSkillDp}</td>
-                                    <td className="px-4 py-2">{user.updatedAt}</td>
+                                    <td className="px-4 py-2">{convertUTCtoJST(user.updatedAt)}</td>
                                 </tr>
                             ))}
                         </tbody>
