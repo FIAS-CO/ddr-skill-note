@@ -5,12 +5,6 @@ import { RankingSong } from '../components/RankingSongRow';
 // TODO 本番URLと分岐させられるようにする
 const API_BASE_URL = 'http://localhost:3000';
 
-export interface RankingSongs {
-    CLASSIC: RankingSong[];
-    WHITE: RankingSong[];
-    GOLD: RankingSong[];
-}
-
 const api = axios.create({
     baseURL: API_BASE_URL,
 });
@@ -49,10 +43,22 @@ export const getStats = async (userId: string): Promise<PlayerStats> => {
     return response.data;
 };
 
-export const getRankingSongs = async (): Promise<{ [grade: string]: { SP: RankingSongs; DP: RankingSongs } }> => {
+
+export interface RankingSongsSpDp {
+    SP: RankingSongs;
+    DP: RankingSongs;
+}
+
+export interface RankingSongs {
+    CLASSIC: RankingSong[];
+    WHITE: RankingSong[];
+    GOLD: RankingSong[];
+}
+
+
+export const getRankingSongs = async (grade: string): Promise<RankingSongs> => {
     try {
-        const response = await api.get<{ [grade: string]: { SP: RankingSongs; DP: RankingSongs } }>(`/ranking-songs`);
-        console.log('API Response:', response.data); // デバッグ用ログ
+        const response = await api.get<RankingSongs>(`/api/ranking-songs/${grade}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching ranking songs:', error);

@@ -1,50 +1,38 @@
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import GradeSelector from "./RankingSelector";
-import { useState, useEffect, useMemo } from 'react';
 import SongTable from "./SongTable";
-import { getRankingSongs, RankingSongs } from '../services/api';
 import Tab from './Tab';
-
-interface AllRankingSongs {
-  [grade: string]: {
-    SP: RankingSongs;
-    DP: RankingSongs;
-  };
-}
+import { getRankingSongs, RankingSongs } from '../services/api';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('WORLD');
-  const [allPopularSongs, setAllPopularSongs] = useState<AllRankingSongs | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [rankingSongs, setRankingSongs] = useState<RankingSongs | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
 
-  useEffect(() => {
-    const fetchAllPopularSongs = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const data = await getRankingSongs();
-        setAllPopularSongs(data);
-      } catch (err) {
-        setError('Failed to fetch ranking songs. Please try again later.');
-        console.error('Error fetching ranking songs:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAllPopularSongs();
-  }, []);
-
-  const currentPopularSongs = useMemo(() => {
-    if (allPopularSongs && allPopularSongs[selectedGrade]) {
-      return allPopularSongs[selectedGrade];
+  const fetchRankingSongs = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await getRankingSongs(selectedGrade);
+      setRankingSongs(data);
+    } catch (err) {
+      setError('Failed to fetch ranking songs. Please try again later.');
+      console.error('Error fetching ranking songs:', err);
+    } finally {
+      setIsLoading(false);
     }
-    return { SP: { CLASSIC: [], WHITE: [], GOLD: [] }, DP: { CLASSIC: [], WHITE: [], GOLD: [] } };
-  }, [allPopularSongs, selectedGrade]);
+  };
+
+  useEffect(() => {
+    fetchRankingSongs();
+  }, [selectedGrade]);
 
   const handleGradeChange = (grade: string) => {
     setSelectedGrade(grade);
+    fetchRankingSongs();
   };
 
   if (isLoading) {
@@ -52,8 +40,10 @@ const SongRankingPage: React.FC = () => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="text-red-500">{error}</div>;
   }
+
+  const currentRankingSongs = rankingSongs ? rankingSongs[activeTab] : { CLASSIC: [], WHITE: [], GOLD: [] };
 
   return (
     <div className="container mx-auto px-4 py-8 pt-16">
@@ -64,7 +54,7 @@ const SongRankingPage: React.FC = () => {
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
       />
       {['CLASSIC', 'WHITE', 'GOLD'].map((category) => {
-        const songs = currentPopularSongs[activeTab][category as keyof RankingSongs];
+        const songs = currentRankingSongs[category as keyof typeof currentRankingSongs];
         if (!songs || songs.length === 0) {
           return (
             <div key={category} className="mb-8">
