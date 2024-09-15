@@ -1,15 +1,17 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "composite": true,
-      "types": ["vitest/globals"],
-      "jsx": "react-jsx",
-    },
-    "include": [
-      "tests",
-      "**/*.test.ts",
-      "**/*.test.tsx",
-      "src/**/*.ts",
-      "src/**/*.tsx"
-    ]
-  }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "types": [
+      "vitest/globals"
+    ],
+    "jsx": "react-jsx",
+  },
+  "include": [
+    "tests",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}
