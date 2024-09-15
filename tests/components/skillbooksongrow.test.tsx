@@ -14,7 +14,7 @@ describe('SkillBookSongRow', () => {
     render(
       <table>
         <tbody>
-          <SkillBookSongRow song={mockSong} />
+          <SkillBookSongRow song={mockSong} ranking={0} />
         </tbody>
       </table>
     );
