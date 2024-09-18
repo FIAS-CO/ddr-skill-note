@@ -8,10 +8,25 @@ const HomePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     function convertUTCtoJST(utcDateString: string): string {
-        const utcDate = new Date(utcDateString);
-        const jstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000)); // UTCに9時間を加算
+        // UTCの日付文字列をパースして、明示的にUTCとして解釈
+        const utcDate = new Date(utcDateString + 'Z');
 
-        return jstDate.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+        // 日本時間に変換（UTCから9時間後）
+        const jstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
+
+        // 日本のローカル形式で文字列に変換し、最後に "JST" を追加
+        const formattedDate = jstDate.toLocaleString('ja-JP', {
+            timeZone: 'Asia/Tokyo',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+
+        return `${formattedDate} JST`;
     }
     useEffect(() => {
         const fetchRecentUsers = async () => {
