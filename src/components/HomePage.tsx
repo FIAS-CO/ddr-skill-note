@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
 
     return (
         <div className="container mx-auto px-4 py-8 pt-16">
-            <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note</h1>
+            <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note(お試し公開版)</h1>
 
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
                     <a href="#" className="bg-black text-white px-4 py-2 rounded">Android版ダウンロード</a>
                     <a href="#" className="bg-black text-white px-4 py-2 rounded">iOS版ダウンロード</a>
                 </div>
-                <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。バグがあったり、データが消えたりする可能性があります。大目に見てください。<br /></p>
+                <p className="font-bold text-red-500 mb-2">※こちら、α版サイトです。データ保存機能は未実装なのでお待ち下さいm(_ _)m<br /></p>
                 <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re">@sig_re</a>)までご連絡ください。<br /><br />
                     *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
 
