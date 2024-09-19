@@ -5,21 +5,25 @@ interface GradeSelectorProps {
   onGradeChange: (grade: string) => void;
 }
 
-const grades = [
-  'WORLD',
-  'SUN+++',
-  'SUN++',
-  'SUN+',
-  'SUN',
-  'NEPTUNE+++',
-  'NEPTUNE++',
-  'NEPTUNE+',
-  'NEPTUNE',
-  'URANUS+++',
-  'URANUS++',
-  'URANUS+',
-  'URANUS',
-  // Add more grades as needed
+interface GradeOption {
+  value: string;
+  label: string;
+}
+
+const grades: GradeOption[] = [
+  { value: 'WORLD', label: 'WORLD (90,000~)' },
+  { value: 'SUN+++', label: 'SUN+++ (86,250~)' },
+  { value: 'SUN++', label: 'SUN++ (82,500~)' },
+  { value: 'SUN+', label: 'SUN+ (78,750~)' },
+  { value: 'SUN', label: 'SUN (75,000~)' },
+  { value: 'NEPTUNE+++', label: 'NEPTUNE+++ (71,250~)' },
+  { value: 'NEPTUNE++', label: 'NEPTUNE++ (67,500~)' },
+  { value: 'NEPTUNE+', label: 'NEPTUNE+ (63,750~)' },
+  { value: 'NEPTUNE', label: 'NEPTUNE (60,000~)' },
+  { value: 'URANUS+++', label: 'URANUS+++ (56,250~)' },
+  { value: 'URANUS++', label: 'URANUS++ (52,500~)' },
+  { value: 'URANUS+', label: 'URANUS+ (48,750~)' },
+  { value: 'URANUS', label: 'URANUS (45,000~)' },
 ];
 
 const GradeSelector: React.FC<GradeSelectorProps> = ({ selectedGrade, onGradeChange }) => {
@@ -35,8 +39,8 @@ const GradeSelector: React.FC<GradeSelectorProps> = ({ selectedGrade, onGradeCha
         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >
         {grades.map((grade) => (
-          <option key={grade} value={grade}>
-            {grade}
+          <option key={grade.value} value={grade.value}>
+            {grade.label}
           </option>
         ))}
       </select>

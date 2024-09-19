@@ -6,7 +6,7 @@ import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 
 const SongRankingPage: React.FC = () => {
-  const [selectedGrade, setSelectedGrade] = useState('WORLD');
+  const [selectedGrade, setSelectedGrade] = useState('SUN+++');
   const [rankingSongs, setRankingSongs] = useState<RankingSongsSpDp | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

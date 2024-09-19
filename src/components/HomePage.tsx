@@ -8,11 +8,7 @@ const HomePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     function convertUTCtoJST(utcDateString: string): string {
-        // UTCの日付文字列をパースして、明示的にUTCとして解釈
-        const utcDate = new Date(utcDateString);
-
-        // 日本時間に変換（UTCから9時間後）
-        const jstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
+        const jstDate = new Date(utcDateString);
 
         // 日本のローカル形式で文字列に変換し、最後に "JST" を追加
         const formattedDate = jstDate.toLocaleString('ja-JP', {
@@ -60,7 +56,7 @@ const HomePage: React.FC = () => {
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
                 <p>Dance Dance Revolutionのファンサイトです。<br />
                     自身のフレアスキル対象楽曲一覧を他のプレイヤーにシェアしたり、他のユーザーが対象にしている頻度が多い楽曲の情報を集計し公開します。<br />
-                    データのアップロードはスマホアプリ"DDR Score Manager A"から行います。(まだ未実装なのでちょっとまってね)<br /></p>
+                    データのアップロードはスマホアプリ"DDR Score Manager A"から行います。<br /></p>
                 <div className="flex justify-center items-center space-x-4 my-4">
                     <a href="https://play.google.com/store/apps/details?id=jp.linanfine.dsma" target="_blank" rel="noopener noreferrer" className="inline-block">
                         <img src="/google-play-badge.png" alt="Get it on Google Play" className="h-16" />
@@ -69,7 +65,7 @@ const HomePage: React.FC = () => {
                         <img src="/app-store-badge.svg" alt="Download on the App Store" className="h-16" />
                     </a>
                 </div>
-                <p className="font-bold text-red-500 mb-2">※こちら、α版サイトです。データ保存機能は未実装なのでお待ち下さいm(_ _)m<br /></p>
+                <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。データアップロード機能はAndroidのみ実装済みです。iOSは少しお待ち下さいm(_ _)m<br /></p>
                 <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re" target="_blank" rel="noopener noreferrer">@sig_re</a>)までご連絡ください。<br /><br />
                     *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
 
