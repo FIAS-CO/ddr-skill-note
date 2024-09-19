@@ -62,8 +62,8 @@ const HomePage: React.FC = () => {
                     自身のフレアスキル対象楽曲一覧を他のプレイヤーにシェアしたり、他のユーザーが対象にしている頻度が多い楽曲の情報を集計し公開します。<br />
                     データのアップロードはスマホアプリ"DDR Score Manager A"から行います。(まだ未実装なのでちょっとまってね)<br /></p>
                 <div className="flex justify-around my-4">
-                    <a href="#" className="bg-black text-white px-4 py-2 rounded">Android版ダウンロード</a>
-                    <a href="#" className="bg-black text-white px-4 py-2 rounded">iOS版ダウンロード</a>
+                    <a href="https://play.google.com/store/apps/details?id=jp.linanfine.dsma" className="bg-black text-white px-4 py-2 rounded">Android版ダウンロード</a>
+                    <a href="https://apps.apple.com/jp/app/ddr-score-manager-a/id1100126073" className="bg-black text-white px-4 py-2 rounded">iOS版ダウンロード</a>
                 </div>
                 <p className="font-bold text-red-500 mb-2">※こちら、α版サイトです。データ保存機能は未実装なのでお待ち下さいm(_ _)m<br /></p>
                 <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re">@sig_re</a>)までご連絡ください。<br /><br />
