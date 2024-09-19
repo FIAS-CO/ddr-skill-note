@@ -61,12 +61,16 @@ const HomePage: React.FC = () => {
                 <p>Dance Dance Revolutionのファンサイトです。<br />
                     自身のフレアスキル対象楽曲一覧を他のプレイヤーにシェアしたり、他のユーザーが対象にしている頻度が多い楽曲の情報を集計し公開します。<br />
                     データのアップロードはスマホアプリ"DDR Score Manager A"から行います。(まだ未実装なのでちょっとまってね)<br /></p>
-                <div className="flex justify-around my-4">
-                    <a href="https://play.google.com/store/apps/details?id=jp.linanfine.dsma" className="bg-black text-white px-4 py-2 rounded">Android版ダウンロード</a>
-                    <a href="https://apps.apple.com/jp/app/ddr-score-manager-a/id1100126073" className="bg-black text-white px-4 py-2 rounded">iOS版ダウンロード</a>
+                <div className="flex justify-center items-center space-x-4 my-4">
+                    <a href="https://play.google.com/store/apps/details?id=jp.linanfine.dsma" target="_blank" rel="noopener noreferrer" className="inline-block">
+                        <img src="/google-play-badge.png" alt="Get it on Google Play" className="h-16" />
+                    </a>
+                    <a href="https://apps.apple.com/jp/app/ddr-score-manager-a/id1100126073" target="_blank" rel="noopener noreferrer" className="inline-block">
+                        <img src="/app-store-badge.svg" alt="Download on the App Store" className="h-16" />
+                    </a>
                 </div>
                 <p className="font-bold text-red-500 mb-2">※こちら、α版サイトです。データ保存機能は未実装なのでお待ち下さいm(_ _)m<br /></p>
-                <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re">@sig_re</a>)までご連絡ください。<br /><br />
+                <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re" target="_blank" rel="noopener noreferrer">@sig_re</a>)までご連絡ください。<br /><br />
                     *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
 
             </section>
