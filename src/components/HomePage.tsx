@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     function convertUTCtoJST(utcDateString: string): string {
         // UTCの日付文字列をパースして、明示的にUTCとして解釈
-        const utcDate = new Date(utcDateString + 'Z');
+        const utcDate = new Date(utcDateString);
 
         // 日本時間に変換（UTCから9時間後）
         const jstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
@@ -87,31 +87,31 @@ const HomePage: React.FC = () => {
             </section>
 
             <section>
-                <h2 className="text-2xl font-bold mb-4">最近更新したユーザ一覧</h2>
+                <h2 className="text-2xl font-bold mb-4 dark:text-white">最近更新したユーザ一覧</h2>
                 <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white">
-                        <thead className="bg-gray-100">
+                    <table className="min-w-full bg-white dark:bg-gray-800">
+                        <thead className="bg-gray-100 dark:bg-gray-700">
                             <tr>
-                                <th className="px-4 py-2 text-left">ユーザ名</th>
-                                <th className="px-4 py-2 text-left">フレアランク(SP)</th>
-                                <th className="px-4 py-2 text-left">フレアランク(DP)</th>
-                                <th className="px-4 py-2 text-left">最終更新日</th>
+                                <th className="px-4 py-2 text-left dark:text-gray-300">ユーザ名</th>
+                                <th className="px-4 py-2 text-left dark:text-gray-300">フレアランク(SP)</th>
+                                <th className="px-4 py-2 text-left dark:text-gray-300">フレアランク(DP)</th>
+                                <th className="px-4 py-2 text-left dark:text-gray-300">最終更新日</th>
                             </tr>
                         </thead>
                         <tbody>
                             {recentUsers.map((user, index) => (
-                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'}>
                                     <td className="px-4 py-2">
                                         <Link
                                             to={`/personal-skill/${user.name}`}
-                                            className="text-blue-600 hover:text-blue-800 hover:underline"
+                                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
                                         >
                                             {user.name}
                                         </Link>
                                     </td>
-                                    <td className="px-4 py-2">{user.totalFlareSkillSp}</td>
-                                    <td className="px-4 py-2">{user.totalFlareSkillDp}</td>
-                                    <td className="px-4 py-2">{convertUTCtoJST(user.updatedAt)}</td>
+                                    <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillSp}</td>
+                                    <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillDp}</td>
+                                    <td className="px-4 py-2 dark:text-gray-300">{convertUTCtoJST(user.updatedAt)}</td>
                                 </tr>
                             ))}
                         </tbody>

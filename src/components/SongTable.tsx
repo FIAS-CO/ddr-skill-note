@@ -94,8 +94,8 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+              <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   {headers.map((header, index) => {
                     const key = getSortKey(header);
@@ -103,7 +103,7 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
                       <th
                         key={index}
                         scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer"
                         onClick={() => handleSort(key)}
                       >
                         {header} {getSortIcon(key)}
@@ -112,12 +112,11 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
                   })}
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {sortedSongs.map((song, index) => (
-                  type === 'ranking'
-                    ? <RankingSongRow key={index} song={song as RankingSong} rank={index + 1} />
-                    : <SkillBookSongRow key={index} song={song as SkillBookSong} ranking={index + 1} />
-                ))}
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">                {sortedSongs.map((song, index) => (
+                type === 'ranking'
+                  ? <RankingSongRow key={index} song={song as RankingSong} rank={index + 1} />
+                  : <SkillBookSongRow key={index} song={song as SkillBookSong} ranking={index + 1} />
+              ))}
               </tbody>
             </table>
           </div>
