@@ -15,7 +15,7 @@ export const RankingSongRow: React.FC<{ song: RankingSong; rank: number }> = ({ 
       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100">
         {song.flareRank}
       </span>,
-      <span className="text-gray-600 dark:text-gray-400">{song.overallPercentage}%</span>
+      <span className="text-gray-600 dark:text-gray-400">{song.overallPercentage.toFixed(2)}%</span>
     ]}
   />
 );
