@@ -21,6 +21,7 @@ export const SkillBookSongRow: React.FC<SkillBookSongRowProps> = ({ song, rankin
       renderCells={(song) => [
         <span className="font-medium dark:text-gray-300">{ranking}</span>,
         <span className="font-medium text-gray-900 dark:text-white">{song.title}</span>,
+        <span className="text-gray-600 dark:text-gray-400">{song.chartType}</span>,
         <span className="text-gray-600 dark:text-gray-400">{song.level}</span>,
         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
           {song.flareRank}

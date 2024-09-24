@@ -18,8 +18,8 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
   const [sortedSongs, setSortedSongs] = useState<(RankingSong | SkillBookSong)[]>(songs);
 
   const headers = type === 'ranking'
-    ? ['Rank', 'Title', 'Level', 'Flare Rank', 'Overall %']
-    : ['', 'Title', 'Level', 'Flare Rank', 'Score', 'Flare Skill'];
+    ? ['Rank', 'Title', 'Type', 'Level', 'Flare Rank', 'Overall %']
+    : ['', 'Title', 'Type', 'Level', 'Flare Rank', 'Score', 'Flare Skill'];
 
   const getSortKey = (header: string): SortKey | null => {
     switch (header) {
@@ -31,6 +31,8 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
         return 'overallPercentage';
       case 'Flare Skill':
         return 'flareSkill';
+      case 'Type':
+        return null;
       default:
         return header.toLowerCase() as SortKey;
     }
@@ -112,11 +114,12 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
                   })}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">                {sortedSongs.map((song, index) => (
-                type === 'ranking'
-                  ? <RankingSongRow key={index} song={song as RankingSong} rank={index + 1} />
-                  : <SkillBookSongRow key={index} song={song as SkillBookSong} ranking={index + 1} />
-              ))}
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                {sortedSongs.map((song, index) => (
+                  type === 'ranking'
+                    ? <RankingSongRow key={index} song={song as RankingSong} rank={index + 1} />
+                    : <SkillBookSongRow key={index} song={song as SkillBookSong} ranking={index + 1} />
+                ))}
               </tbody>
             </table>
           </div>

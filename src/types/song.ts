@@ -1,6 +1,7 @@
 export interface BaseSong {
   title: string;
   level: number;
+  chartType: string;
   flareRank: string;
 }
 
