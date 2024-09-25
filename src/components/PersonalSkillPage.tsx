@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import SongTable from './SongTable';
 import StatsOverview from './StatsOverview';
 import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle } from '../services/api';
 import { useParams } from 'react-router-dom';
 import Tab from './Tab';
+import SkillBookSongTable from './SkillBookSongTable';
 
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
@@ -54,7 +54,7 @@ const PersonalSkillPage: React.FC = () => {
     return (
       <div key={`${playStyle}-${category}`} className="mb-8">
         <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
-        <SongTable songs={categorySongs} type="skillbook" />
+        <SkillBookSongTable songs={categorySongs} />
       </div>
     );
   };

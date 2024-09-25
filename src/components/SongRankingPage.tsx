@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import GradeSelector from "./RankingSelector";
-import SongTable from "./SongTable";
 import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
+import RankingSongTable from './RankingSongTable';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('SUN+++');
@@ -66,7 +66,7 @@ const SongRankingPage: React.FC = () => {
         return (
           <div key={category} className="mb-8">
             <h2 className="text-2xl font-bold mb-4">{category}</h2>
-            <SongTable songs={songs} type="ranking" />
+            <RankingSongTable songs={songs} />
           </div>
         );
       })}
