@@ -2,6 +2,7 @@ import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { SkillBookSong } from './SkillBookSongRow';
 import useWindowSize from './util/UseWindowSize';
+import { getChartTypeBackgroundClass } from './util/DdrDefinitionUtil';
 
 interface SkillBookSongTableProps {
     songs: SkillBookSong[];
@@ -95,6 +96,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                 tableClassName="w-full text-xs md:text-sm table-fixed"
                 headerClassName="bg-gray-50 dark:bg-gray-700"
                 rowClassName="hover:bg-gray-50 dark:hover:bg-gray-700"
+                getBackgroundClass={getChartTypeBackgroundClass}
             />
         </div>
     );

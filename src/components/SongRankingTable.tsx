@@ -2,6 +2,7 @@ import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { RankingSong } from './RankingSongRow';
 import useWindowSize from './util/UseWindowSize';
+import { getChartTypeBackgroundClass } from './util/DdrDefinitionUtil';
 
 interface RankingSongTableProps {
     songs: RankingSong[];
@@ -64,14 +65,14 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                     {song.flareRank}
                 </span>
             ),
-            className: 'w-28 text-center'
+            className: 'w-24 text-center'
         },
         {
             header: isMobile ? '%' : 'Overall %',
             key: 'overallPercentage',
             sortable: true,
             render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.overallPercentage.toFixed(2)}%</span>,
-            className: 'w-28 text-right'
+            className: 'w-16 text-right'
         },
     ];
 
@@ -84,6 +85,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             tableClassName="border-collapse w-full"
             headerClassName="bg-blue-100 dark:bg-blue-800"
             rowClassName="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
+            getBackgroundClass={getChartTypeBackgroundClass}
         />
     );
 };

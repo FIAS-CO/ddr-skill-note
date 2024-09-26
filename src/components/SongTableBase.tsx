@@ -8,17 +8,18 @@ export interface ColumnConfig<T> {
   className?: string;
 }
 
-interface SongTableBaseProps<T> {
+interface SongTableBaseProps<T extends { chartType: string }> {
   items: T[];
   columns: ColumnConfig<T>[];
   initialSortKey?: keyof T;
   initialSortDirection?: 'asc' | 'desc';
   tableClassName?: string;
   headerClassName?: string;
-  rowClassName?: string;
+  rowClassName?: string | ((item: T) => string);
+  getBackgroundClass?: (chartType: string) => string;
 }
 
-function SongTableBase<T extends object>({
+function SongTableBase<T extends { chartType: string }>({
   items,
   columns,
   initialSortKey,
@@ -26,6 +27,7 @@ function SongTableBase<T extends object>({
   tableClassName = '',
   headerClassName = '',
   rowClassName = '',
+  getBackgroundClass = (_) => ""
 }: SongTableBaseProps<T>) {
   const [sortKey, setSortKey] = useState<keyof T | null>(initialSortKey || null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>(initialSortDirection);
@@ -86,18 +88,22 @@ function SongTableBase<T extends object>({
         </tr>
       </thead>
       <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
-        {sortedItems.map((item, index) => (
-          <tr key={index} className={rowClassName}>
-            {columns.map((column, cellIndex) => (
-              <td
-                key={cellIndex}
-                className={`py-4 text-sm text-gray-500 dark:text-gray-400 ${column.className || ''}`}
-              >
-                {column.render(item, index)}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {sortedItems.map((item, index) => {
+          const dynamicRowClassName = typeof rowClassName === 'function' ? rowClassName(item) : rowClassName;
+          const backgroundClass = getBackgroundClass(item.chartType);
+          return (
+            <tr key={index} className={`${dynamicRowClassName} ${backgroundClass}`}>
+              {columns.map((column, cellIndex) => (
+                <td
+                  key={cellIndex}
+                  className={`py-4 text-sm text-gray-500 dark:text-gray-400 ${column.className || ''}`}
+                >
+                  {column.render(item, index)}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
