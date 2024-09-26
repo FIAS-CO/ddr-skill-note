@@ -4,6 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem; /* モバイル時に padding を 0 にする */
+  }
+}
 
 .logo {
   height: 6em;

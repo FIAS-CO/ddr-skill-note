@@ -5,11 +5,16 @@ import PersonalSkillPage from './components/PersonalSkillPage';
 import './App.css';
 import SongRankingPage from './components/SongRankingPage';
 import HomePage from './components/HomePage';
+import useWindowSize from './components/util/UseWindowSize';
 
 function App() {
+
+  const { width } = useWindowSize();
+  const isMobile = width < 768; // md breakpoint in Tailwind
+
   return (
     <Router>
-      <div className="App">
+      <div className={`App ${isMobile ? 'm-0 p-0 w-full' : 'mx-auto px-4 py-8'}`}>
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />

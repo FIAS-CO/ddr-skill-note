@@ -5,6 +5,7 @@ import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle }
 import { useParams } from 'react-router-dom';
 import Tab from './Tab';
 import SkillBookSongTable from './SkillBookSongTable';
+import useWindowSize from './util/UseWindowSize';
 
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
@@ -13,6 +14,9 @@ const PersonalSkillPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
+
+  const { width } = useWindowSize();
+  const isMobile = width < 768; // md breakpoint in Tailwind
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +76,7 @@ const PersonalSkillPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-16">
+    <div className={`container mx-auto px-4 py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : ''}`}>
       <h1 className="text-3xl font-bold mb-8">{userName} さんのフレアスキル帳</h1>
       <Tab
         activeTab={activeTab}
