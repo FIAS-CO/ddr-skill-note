@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import GradeSelector from "./RankingSelector";
 import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
-import RankingSongTable from './RankingSongTable';
+import RankingSongTable from './SongRankingTable';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('SUN+++');
