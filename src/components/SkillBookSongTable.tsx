@@ -28,7 +28,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                     <span className="break-words whitespace-normal">{song.title}</span>
                 </div>
             ),
-            className: 'w-24 md:w-64 px-0 md:px-2 text-left'
+            className: 'w-24 md:w-32 px-0 md:px-2 text-left'
         },
         ...(!isMobile ? [
             {
