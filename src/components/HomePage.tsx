@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { getRecentUsers, UserListItem } from '../services/api';
 import { Link } from 'react-router-dom';
+import useWindowSize from './util/UseWindowSize';
 
 const HomePage: React.FC = () => {
     const [recentUsers, setRecentUsers] = useState<UserListItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { width } = useWindowSize();
+    const isMobile = width < 768; // md breakpoint in Tailwind
+
     function convertUTCtoJST(utcDateString: string): string {
         const jstDate = new Date(utcDateString);
 
@@ -24,6 +28,24 @@ const HomePage: React.FC = () => {
 
         return `${formattedDate} JST`;
     }
+
+    function convertUTCtoJST_TimeOnly(utcDateString: string): string {
+        const jstDate = new Date(utcDateString);
+
+        // 日本のローカル形式で文字列に変換し、最後に "JST" を追加
+        const formattedDate = jstDate.toLocaleString('ja-JP', {
+            timeZone: 'Asia/Tokyo',
+            year: '2-digit',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+
+        return `${formattedDate} JST`;
+    }
+
     useEffect(() => {
         const fetchRecentUsers = async () => {
             try {
@@ -49,9 +71,8 @@ const HomePage: React.FC = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 pt-16">
+        <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
             <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note(お試し公開版)</h1>
-
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
                 <p>Dance Dance Revolutionのファンサイトです。<br />
@@ -111,7 +132,7 @@ const HomePage: React.FC = () => {
                                     </td>
                                     <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillSp}</td>
                                     <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillDp}</td>
-                                    <td className="px-4 py-2 dark:text-gray-300">{convertUTCtoJST(user.updatedAt)}</td>
+                                    <td className="px-4 py-2 dark:text-gray-300">{!isMobile ? convertUTCtoJST(user.updatedAt) : convertUTCtoJST_TimeOnly(user.updatedAt)}</td>
                                 </tr>
                             ))}
                         </tbody>
