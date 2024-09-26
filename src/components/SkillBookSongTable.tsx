@@ -13,7 +13,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
 
     const columns: ColumnConfig<SkillBookSong>[] = [
         {
-            header: isMobile ? '#' : '',
+            header: '',
             key: null,
             sortable: false,
             render: (_, index) => <span className="font-medium dark:text-gray-300">{index + 1}</span>,

@@ -4,6 +4,7 @@ import GradeSelector from "./RankingSelector";
 import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 import RankingSongTable from './SongRankingTable';
+import useWindowSize from './util/UseWindowSize';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('SUN+++');
@@ -11,6 +12,8 @@ const SongRankingPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
+  const { width } = useWindowSize();
+  const isMobile = width < 768; // md breakpoint in Tailwind
 
   const fetchRankingSongs = async () => {
     setIsLoading(true);
@@ -46,7 +49,7 @@ const SongRankingPage: React.FC = () => {
   const currentRankingSongs = rankingSongs ? rankingSongs[activeTab] : { CLASSIC: [], WHITE: [], GOLD: [] };
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-16">
+    <div className={`container mx-auto px-4 py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : ''}`}>
       <h1 className="text-3xl font-bold mb-8">グレード別・カテゴリ別人気曲一覧</h1>
       <GradeSelector selectedGrade={selectedGrade} onGradeChange={handleGradeChange} />
       <Tab
