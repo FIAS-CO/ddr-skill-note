@@ -49,7 +49,7 @@ const SongRankingPage: React.FC = () => {
   const currentRankingSongs = rankingSongs ? rankingSongs[activeTab] : { CLASSIC: [], WHITE: [], GOLD: [] };
 
   return (
-    <div className={`container mx-auto px-4 py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : ''}`}>
+    <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
       <h1 className="text-3xl font-bold mb-8">グレード別・カテゴリ別人気曲一覧</h1>
       <GradeSelector selectedGrade={selectedGrade} onGradeChange={handleGradeChange} />
       <Tab
