@@ -5,7 +5,7 @@ import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle }
 import { useParams } from 'react-router-dom';
 import Tab from './Tab';
 import SkillBookSongTable from './SkillBookSongTable';
-import useWindowSize from './util/UseWindowSize';
+import useWindowSize from '../util/UseWindowSize';
 
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();

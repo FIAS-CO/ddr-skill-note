@@ -4,7 +4,7 @@ import GradeSelector from "./RankingSelector";
 import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 import RankingSongTable from './SongRankingTable';
-import useWindowSize from './util/UseWindowSize';
+import useWindowSize from '../util/UseWindowSize';
 
 const SongRankingPage: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState('SUN+++');

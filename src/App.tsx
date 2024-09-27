@@ -5,7 +5,7 @@ import PersonalSkillPage from './components/PersonalSkillPage';
 import './App.css';
 import SongRankingPage from './components/SongRankingPage';
 import HomePage from './components/HomePage';
-import useWindowSize from './components/util/UseWindowSize';
+import useWindowSize from './util/UseWindowSize';
 
 function App() {
 

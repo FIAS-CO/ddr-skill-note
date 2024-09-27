@@ -1,8 +1,8 @@
 import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { SkillBookSong } from './SkillBookSongRow';
-import useWindowSize from './util/UseWindowSize';
-import { getChartTypeBackgroundClass, convertToFlareRankString } from './util/DdrDefinitionUtil';
+import useWindowSize from '../util/UseWindowSize';
+import { getChartTypeBackgroundClass, convertToFlareRankString } from '../util/DdrDefinitionUtil';
 
 interface SkillBookSongTableProps {
     songs: SkillBookSong[];

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { getRecentUsers, UserListItem } from '../services/api';
 import { Link } from 'react-router-dom';
-import useWindowSize from './util/UseWindowSize';
+import useWindowSize from '../util/UseWindowSize';
 
 const HomePage: React.FC = () => {
     const [recentUsers, setRecentUsers] = useState<UserListItem[]>([]);
