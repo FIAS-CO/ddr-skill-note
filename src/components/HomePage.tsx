@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
     }
 
     return (
-        <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
+        <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-2' : 'px-4'}`}>
             <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note(お試し公開版)</h1>
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
@@ -89,7 +89,6 @@ const HomePage: React.FC = () => {
                 <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。データアップロード機能はAndroidのみ実装済みです。iOSは少しお待ち下さいm(_ _)m<br /></p>
                 <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re" target="_blank" rel="noopener noreferrer">@sig_re</a>)までご連絡ください。<br /><br />
                     *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
-
             </section>
 
             <section className="mb-8">
@@ -109,30 +108,30 @@ const HomePage: React.FC = () => {
 
             <section>
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">最近更新したユーザ一覧</h2>
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white dark:bg-gray-800">
-                        <thead className="bg-gray-100 dark:bg-gray-700">
+                <div className="overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th className="px-4 py-2 text-left dark:text-gray-300">ユーザ名</th>
-                                <th className="px-4 py-2 text-left dark:text-gray-300">フレアランク(SP)</th>
-                                <th className="px-4 py-2 text-left dark:text-gray-300">フレアランク(DP)</th>
-                                <th className="px-4 py-2 text-left dark:text-gray-300">最終更新日</th>
+                                <th scope="col" className="px-1 sm:px-6 py-3">ユーザ名</th>
+                                <th scope="col" className="px-1 sm:px-6 py-3">フレアランク(SP)</th>
+                                <th scope="col" className="px-1 sm:px-6 py-3">フレアランク(DP)</th>
+                                <th scope="col" className="px-1 sm:px-6 py-3">最終更新日</th>
                             </tr>
                         </thead>
                         <tbody>
                             {recentUsers.map((user, index) => (
-                                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'}>
-                                    <td className="px-4 py-2">
+                                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <Link
                                             to={`/personal-skill/${user.name}`}
-                                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
+                                            className="hover:underline"
                                         >
                                             {user.name}
                                         </Link>
-                                    </td>
-                                    <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillSp}</td>
-                                    <td className="px-4 py-2 dark:text-gray-300">{user.totalFlareSkillDp}</td>
-                                    <td className="px-4 py-2 dark:text-gray-300">{!isMobile ? convertUTCtoJST(user.updatedAt) : convertUTCtoJST_TimeOnly(user.updatedAt)}</td>
+                                    </th>
+                                    <td className="px-1 sm:px-6 py-4">{user.totalFlareSkillSp}</td>
+                                    <td className="px-1 sm:px-6 py-4">{user.totalFlareSkillDp}</td>
+                                    <td className="px-1 sm:px-6 py-4">{isMobile ? convertUTCtoJST_TimeOnly(user.updatedAt) : convertUTCtoJST(user.updatedAt)}</td>
                                 </tr>
                             ))}
                         </tbody>
