@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { SkillBookSong } from '../components/SkillBookSongRow';
 import { RankingSong } from '../components/RankingSongRow';
+import { calculateFlareSkill } from '../util/DdrDefinitionUtil';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 console.log('API_BASE_URL:', API_BASE_URL); // デバッグ用
@@ -57,7 +58,29 @@ export interface RankingSongs {
 export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> => {
     try {
         const response = await api.get<RankingSongsSpDp>(`/api/ranking-songs/${grade}`);
-        return response.data;
+        const data = response.data;
+
+        // Process each category and add flareSkill
+        const processCategory = (category: RankingSong[]): RankingSong[] => {
+            return category.map(song => ({
+                ...song,
+                flareSkill: calculateFlareSkill(song.level, song.flareRank)
+            }));
+        };
+
+        // Process all categories for both SP and DP
+        return {
+            SP: {
+                CLASSIC: processCategory(data.SP.CLASSIC),
+                WHITE: processCategory(data.SP.WHITE),
+                GOLD: processCategory(data.SP.GOLD)
+            },
+            DP: {
+                CLASSIC: processCategory(data.DP.CLASSIC),
+                WHITE: processCategory(data.DP.WHITE),
+                GOLD: processCategory(data.DP.GOLD)
+            }
+        };
     } catch (error) {
         console.error('Error fetching ranking songs:', error);
         throw error;

@@ -2,7 +2,7 @@ import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { RankingSong } from './RankingSongRow';
 import useWindowSize from '../util/UseWindowSize';
-import { getChartTypeBackgroundClass, calculateFlareSkill, convertToFlareRankString } from '../util/DdrDefinitionUtil';
+import { getChartTypeBackgroundClass, convertToFlareRankString } from '../util/DdrDefinitionUtil';
 
 interface RankingSongTableProps {
     songs: RankingSong[];

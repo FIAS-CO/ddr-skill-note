@@ -53,7 +53,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                 sortable: true,
                 render: (song) => (
                     <span className="text-gray-600 dark:text-gray-400">
-                        {song.chartType}({song.level})
+                        {song.level}
                     </span>
                 ),
                 className: 'w-12 px-1 text-left'
@@ -87,16 +87,16 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
     ];
 
     return (
-            <SongTableBase
-                items={songs}
-                columns={columns}
-                initialSortKey="flareSkill"
-                initialSortDirection="desc"
+        <SongTableBase
+            items={songs}
+            columns={columns}
+            initialSortKey="flareSkill"
+            initialSortDirection="desc"
             tableClassName="border-collapse w-full"
-                headerClassName="bg-gray-50 dark:bg-gray-700"
-                rowClassName="hover:bg-gray-50 dark:hover:bg-gray-700"
-                getBackgroundClass={getChartTypeBackgroundClass}
-            />
+            headerClassName="bg-gray-50 dark:bg-gray-700"
+            rowClassName="hover:bg-gray-50 dark:hover:bg-gray-700"
+            getBackgroundClass={getChartTypeBackgroundClass}
+        />
     );
 };
 
