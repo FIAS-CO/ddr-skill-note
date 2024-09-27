@@ -75,7 +75,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             key: 'flareSkill',
             sortable: true,
             render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{song.flareSkill}</span>,
-            className: 'w-8 md:w-20 px-1 md:px-2 text-left'
+            className: 'w-8 md:w-12 px-1 md:px-2 text-left'
         },
         {
             header: 'Score',
