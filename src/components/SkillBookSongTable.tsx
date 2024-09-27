@@ -26,10 +26,10 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             sortable: true,
             render: (song) => (
                 <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm">
-                    <span className="break-words whitespace-normal">{song.title}</span>
+                    <span className="break-word whitespace-normal">{song.title}</span>
                 </div>
             ),
-            className: 'w-24 md:w-32 px-0 md:px-2 text-left'
+            className: 'w-24 md:w-1/3 px-0 md:px-2 text-left'
         },
         ...(!isMobile ? [
             {
@@ -37,7 +37,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                 key: 'chartType',
                 sortable: false,
                 render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.chartType}</span>,
-                className: 'w-14 md:w-16 px-1 md:px-2 text-left'
+                className: 'w-14 md:w-12 px-1 md:px-2 text-left'
             },
             {
                 header: 'Level',
@@ -56,7 +56,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                         {song.chartType}({song.level})
                     </span>
                 ),
-                className: 'w-16 px-1 text-left'
+                className: 'w-12 px-1 text-left'
             }
         ]) as ColumnConfig<SkillBookSong>[],
         {
@@ -68,7 +68,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                     {convertToFlareRankString(song.flareRank)}
                 </span>
             ),
-            className: 'w-6 md:w-20 px-1 md:px-2 text-left'
+            className: 'w-6 md:w-12 px-1 md:px-2 text-left'
         },
         {
             header: isMobile ? 'FS' : 'Flare Skill',
@@ -82,23 +82,21 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             key: 'score',
             sortable: true,
             render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.score.toLocaleString()}</span>,
-            className: 'w-16 md:w-24 px-1 md:px-2 text-left'
+            className: 'w-16 md:w-16 px-1 md:px-2 text-left'
         },
     ];
 
     return (
-        <div className="overflow-x-auto">
             <SongTableBase
                 items={songs}
                 columns={columns}
                 initialSortKey="flareSkill"
                 initialSortDirection="desc"
-                tableClassName="w-full text-xs md:text-sm table-fixed"
+            tableClassName="border-collapse w-full"
                 headerClassName="bg-gray-50 dark:bg-gray-700"
                 rowClassName="hover:bg-gray-50 dark:hover:bg-gray-700"
                 getBackgroundClass={getChartTypeBackgroundClass}
             />
-        </div>
     );
 };
 

@@ -19,7 +19,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             key: null,
             sortable: false,
             render: (_, index) => <span className="font-medium dark:text-gray-300">{index + 1}</span>,
-            className: 'w-16 text-center'
+            className: 'w-[24px] md:w-12 px-1 md:px-2 text-left'
         },
         {
             header: 'Title',
@@ -71,7 +71,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             header: isMobile ? 'FS' : 'Flare Skill',
             key: 'flareSkill',
             sortable: true,
-            render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{calculateFlareSkill(song.level, song.flareRank)}</span>,
+            render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{song.flareSkill}</span>,
             className: 'w-8 md:w-20 px-1 md:px-2 text-left'
         },
         {
