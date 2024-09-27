@@ -3,6 +3,7 @@ import { BaseSong } from "../types/song";
 
 export interface RankingSong extends BaseSong {
   overallPercentage: number;
+  flareSkill: number;
 }
 
 export const RankingSongRow: React.FC<{ song: RankingSong; rank: number }> = ({ song, rank }) => (

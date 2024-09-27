@@ -2,7 +2,7 @@ import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { SkillBookSong } from './SkillBookSongRow';
 import useWindowSize from './util/UseWindowSize';
-import { getChartTypeBackgroundClass } from './util/DdrDefinitionUtil';
+import { getChartTypeBackgroundClass, convertToFlareRankString } from './util/DdrDefinitionUtil';
 
 interface SkillBookSongTableProps {
     songs: SkillBookSong[];
@@ -65,7 +65,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             sortable: true,
             render: (song) => (
                 <span className="px-1 md:px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
-                    {song.flareRank}
+                    {convertToFlareRankString(song.flareRank)}
                 </span>
             ),
             className: 'w-6 md:w-20 px-1 md:px-2 text-left'

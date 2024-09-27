@@ -2,7 +2,7 @@ import React from 'react';
 import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { RankingSong } from './RankingSongRow';
 import useWindowSize from './util/UseWindowSize';
-import { getChartTypeBackgroundClass } from './util/DdrDefinitionUtil';
+import { getChartTypeBackgroundClass, calculateFlareSkill, convertToFlareRankString } from './util/DdrDefinitionUtil';
 
 interface RankingSongTableProps {
     songs: RankingSong[];
@@ -50,22 +50,29 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                 sortable: true,
                 render: (song) => (
                     <span className="text-gray-600 dark:text-gray-400">
-                        {song.chartType}({song.level})
+                        {song.level}
                     </span>
                 ),
                 className: 'w-16 px-1 text-left'
             }
         ]) as ColumnConfig<RankingSong>[],
         {
-            header: 'Flare Rank',
+            header: isMobile ? 'FR' : 'Flare Rank',
             key: 'flareRank',
             sortable: true,
             render: (song) => (
                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100">
-                    {song.flareRank}
+                    {convertToFlareRankString(song.flareRank)}
                 </span>
             ),
-            className: 'w-24 text-center'
+            className: 'w-16 text-left'
+        },
+        {
+            header: isMobile ? 'FS' : 'Flare Skill',
+            key: 'flareSkill',
+            sortable: true,
+            render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{calculateFlareSkill(song.level, song.flareRank)}</span>,
+            className: 'w-8 md:w-20 px-1 md:px-2 text-left'
         },
         {
             header: isMobile ? '%' : 'Overall %',
