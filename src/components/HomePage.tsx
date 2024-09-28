@@ -72,7 +72,7 @@ const HomePage: React.FC = () => {
 
     return (
         <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-2' : 'px-4'}`}>
-            <h1 className="text-3xl font-bold mb-8">DDR Flare Skill Note(お試し公開版)</h1>
+            <h1 className="text-3xl font-bold mb-8">DDR FlareNote(お試し公開版)</h1>
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">このサイトは何？</h2>
                 <p>Dance Dance Revolutionのファンサイトです。<br />
@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
                         <img src="/app-store-badge.svg" alt="Download on the App Store" className="h-16" />
                     </a>
                 </div>
-                <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。データアップロード機能はAndroidのみ実装済みです。iOSは少しお待ち下さいm(_ _)m<br /></p>
+                <p className="font-bold text-red-500 mb-2">※こちら、β版サイトです。<br /></p>
                 <p>ご意見、ご要望、バグの報告はX(<a href="https://x.com/sig_re" target="_blank" rel="noopener noreferrer">@sig_re</a>)までご連絡ください。<br /><br />
                     *Non-Japanese users: please use translation or ask @sig_re how to use. ;)</p>
             </section>
