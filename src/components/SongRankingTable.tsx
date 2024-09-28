@@ -25,8 +25,12 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             header: 'Title',
             key: 'title',
             sortable: true,
-            render: (song) => <span className="font-medium text-gray-900 dark:text-white">{song.title}</span>,
-            className: 'w-1/3 text-left'
+            render: (song) => (
+                <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm">
+                    <span className="break-word whitespace-normal">{song.title}</span>
+                </div>
+            ),
+            className: 'w-24 md:w-1/3 px-0 md:px-2 text-left'
         },
         ...(!isMobile ? [
             {
@@ -53,7 +57,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                         {song.level}
                     </span>
                 ),
-                className: 'w-16 px-1 text-left'
+                className: 'w-8 md:w-12 px-1 text-left'
             }
         ]) as ColumnConfig<RankingSong>[],
         {
@@ -61,25 +65,25 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             key: 'flareRank',
             sortable: true,
             render: (song) => (
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100">
+                <span className="px-1 md:px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
                     {convertToFlareRankString(song.flareRank)}
                 </span>
             ),
-            className: 'w-16 text-left'
+            className: 'w-6 md:w-12 px-1 md:px-2 text-left'
         },
         {
             header: isMobile ? 'FS' : 'Flare Skill',
             key: 'flareSkill',
             sortable: true,
             render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{song.flareSkill}</span>,
-            className: 'w-8 md:w-20 px-1 md:px-2 text-left'
+            className: 'w-8 md:w-12 px-1 md:px-2 text-left'
         },
         {
             header: isMobile ? '%' : 'Overall %',
             key: 'overallPercentage',
             sortable: true,
             render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.overallPercentage.toFixed(2)}%</span>,
-            className: 'w-16 text-right'
+            className: 'w-8 md:w-12 px-1 md:px-2 text-left'
         },
     ];
 

@@ -65,7 +65,7 @@ export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> 
             return category.map(song => ({
                 ...song,
                 flareSkill: calculateFlareSkill(song.level, song.flareRank)
-            }));
+            })).slice(0, 50);
         };
 
         // Process all categories for both SP and DP
