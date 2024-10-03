@@ -2,7 +2,7 @@ export interface BaseSong {
   title: string;
   level: number;
   chartType: string;
-  flareRank: string;
+  flareRank: number;
 }
 
 export interface BaseSongRowProps<T extends BaseSong> {

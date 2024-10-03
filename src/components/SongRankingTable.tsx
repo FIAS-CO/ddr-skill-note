@@ -44,6 +44,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                 header: 'Level',
                 key: 'level',
                 sortable: true,
+                sortType: 'number',
                 render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.level}</span>,
                 className: 'w-10 md:w-12 px-1 md:px-2 text-left'
             }
@@ -52,6 +53,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                 header: 'Lv',
                 key: 'level',
                 sortable: true,
+                sortType: 'number',
                 render: (song) => (
                     <span className="text-gray-600 dark:text-gray-400">
                         {song.level}
@@ -64,6 +66,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             header: isMobile ? 'FR' : 'Flare Rank',
             key: 'flareRank',
             sortable: true,
+            sortType: 'number',
             render: (song) => (
                 <span className="px-1 md:px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
                     {convertToFlareRankString(song.flareRank)}
@@ -75,6 +78,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             header: isMobile ? 'FS' : 'Flare Skill',
             key: 'flareSkill',
             sortable: true,
+            sortType: 'number',
             render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{song.flareSkill}</span>,
             className: 'w-8 md:w-12 px-1 md:px-2 text-left'
         },
@@ -82,6 +86,7 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
             header: isMobile ? '%' : 'Overall %',
             key: 'overallPercentage',
             sortable: true,
+            sortType: 'number',
             render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.overallPercentage.toFixed(2)}%</span>,
             className: 'w-8 md:w-12 px-1 md:px-2 text-left'
         },

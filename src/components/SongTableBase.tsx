@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+export type SortType = 'string' | 'number';
 export interface ColumnConfig<T> {
   header: string | React.ReactNode;
   key: keyof T | null;
   sortable: boolean;
+  sortType?: SortType;
   render: (item: T, index: number) => React.ReactNode;
   className?: string;
 }
@@ -36,15 +38,29 @@ function SongTableBase<T extends { chartType: string }>({
   useEffect(() => {
     if (sortKey) {
       const sorted = [...items].sort((a, b) => {
-        if (a[sortKey] < b[sortKey]) return sortDirection === 'asc' ? -1 : 1;
-        if (a[sortKey] > b[sortKey]) return sortDirection === 'asc' ? 1 : -1;
-        return 0;
+        const column = columns.find(col => col.key === sortKey);
+        const aValue = a[sortKey];
+        const bValue = b[sortKey];
+
+        // sortType が設定されていない場合は 'string' として扱う
+        const effectiveSortType = column?.sortType ?? 'string';
+
+        if (effectiveSortType === 'number') {
+          return sortDirection === 'asc'
+            ? (Number(aValue) - Number(bValue))
+            : (Number(bValue) - Number(aValue));
+        } else {
+          // 'string' 型の場合（デフォルト）
+          return sortDirection === 'asc'
+            ? String(aValue).localeCompare(String(bValue))
+            : String(bValue).localeCompare(String(aValue));
+        }
       });
       setSortedItems(sorted);
     } else {
       setSortedItems(items);
     }
-  }, [items, sortKey, sortDirection]);
+  }, [items, sortKey, sortDirection, columns]);
 
   const handleSort = (key: keyof T | null) => {
     if (key === null) return;
