@@ -3,6 +3,7 @@ import * as React from 'react';
 import { getRecentUsers, UserListItem } from '../services/api';
 import { Link } from 'react-router-dom';
 import useWindowSize from '../util/UseWindowSize';
+import Adsense from '../adsense/Adsense';
 
 const HomePage: React.FC = () => {
     const [recentUsers, setRecentUsers] = useState<UserListItem[]>([]);
@@ -105,6 +106,8 @@ const HomePage: React.FC = () => {
                     <li>処理が完了しましたら、「スキル帳ページ」ボタンでサイトにアクセスしてください</li>
                 </ol>
             </section>
+
+            <Adsense />
 
             <section>
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">最近更新したユーザ一覧</h2>
