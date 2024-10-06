@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import PersonalSkillPage from './components/PersonalSkillPage';
 import './App.css';
@@ -20,6 +20,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/personal-skill/:userName" element={<PersonalSkillPage />} />
           <Route path="/song-ranking" element={<SongRankingPage />} />
+          <Route
+            path="/song-ranking/:grade"
+            element={<Navigate to="/song-ranking" replace />}
+          />
         </Routes>
       </div>
     </Router>

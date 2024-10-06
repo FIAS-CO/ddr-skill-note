@@ -5,9 +5,11 @@ import Tab from './Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 import RankingSongTable from './SongRankingTable';
 import useWindowSize from '../util/UseWindowSize';
+import { useParams } from 'react-router-dom';
 
 const SongRankingPage: React.FC = () => {
-  const [selectedGrade, setSelectedGrade] = useState('SUN+++');
+  const { grade } = useParams<{ grade?: string }>();
+  const [selectedGrade, setSelectedGrade] = useState(grade || 'WORLD');
   const [rankingSongs, setRankingSongs] = useState<RankingSongsSpDp | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,11 +17,14 @@ const SongRankingPage: React.FC = () => {
   const { width } = useWindowSize();
   const isMobile = width < 768; // md breakpoint in Tailwind
 
-  const fetchRankingSongs = async () => {
+  const fetchRankingSongs = async (grade: string) => {
+    const actualGrade = getActualGrade(grade);
+
+    console.log('fetchRankingSongs ' + actualGrade)
     setIsLoading(true);
     setError(null);
     try {
-      const data = await getRankingSongs(selectedGrade);
+      const data = await getRankingSongs(actualGrade);
       setRankingSongs(data);
     } catch (err) {
       setError('Failed to fetch ranking songs. Please try again later.');
@@ -29,19 +34,35 @@ const SongRankingPage: React.FC = () => {
     }
   };
 
+  const getActualGrade = (grade: string): string => {
+    console.log('getGradeFromPath before ' + grade)
+
+    const grades = new Set([
+      'WORLD',
+      'SUN+++', 'SUN++', 'SUN+', 'SUN',
+      'NEPTUNE+++', 'NEPTUNE++', 'NEPTUNE+', 'NEPTUNE',
+      'URANUS+++', 'URANUS++', 'URANUS+', 'URANUS'
+    ]);
+
+    if (grades.has(grade)) {
+      return grade;
+    }
+    return 'WORLD';
+  };
+
   useEffect(() => {
-    fetchRankingSongs();
+    fetchRankingSongs(selectedGrade);
   }, [selectedGrade]);
 
   const handleGradeChange = (grade: string) => {
+    console.log('handleGradeChange ' + grade)
     setSelectedGrade(grade);
-    fetchRankingSongs();
   };
 
   const shareToX = () => {
     const text = `${selectedGrade}帯対象曲ランキングをチェック！\n#DDR_FlareNote\n`;
     const encodedText = encodeURIComponent(text);
-    const url = encodeURIComponent(window.location.href);
+    const url = encodeURIComponent(window.location.href + '/' + selectedGrade);
     window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${url}`, '_blank');
   };
 
