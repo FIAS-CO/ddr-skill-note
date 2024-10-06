@@ -11,7 +11,7 @@ const SupportUsPage = () => {
                     <li>ドメイン維持費：年間1,000円</li>
                     <li>開発にかかる時間：たくさん</li>
                 </ul>
-                <p className="mb-4">サービスの継続的な改善と維持のため、皆様からのサポートを心よりお願いしております。</p>
+                <p className="mb-4">サービスの継続的な改善と維持のため、皆様からのサポートを心よりお願いいたします。</p>
                 <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 mt-8">
                     <h2 className="text-2xl font-semibold mb-4">サポート方法</h2>
                     <ol className="list-decimal list-outside space-y-4 pl-5">
