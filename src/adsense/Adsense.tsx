@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-const hostname = "fia-s.com"  //本番サイトのホスト名
+const hostname = "flarenote.fia-s.com"  //本番サイトのホスト名
 
 declare global {
   // eslint-disable-next-line no-unused-vars
