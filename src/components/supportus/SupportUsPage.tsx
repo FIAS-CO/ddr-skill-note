@@ -4,7 +4,7 @@ const SupportUsPage = () => {
             <div className="max-w-4xl mx-0">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">サポートのお願い</h1>
                 <p className="mb-4">日頃より当サービスをご利用いただき、誠にありがとうございます。私たちは、より良いサービスを提供し続けるために日々努力しております。</p>
-                <p className="mb-4">現在、本サービスおよびDDR Score Managerの運営のため、以下のコストが発生しています：</p>
+                <p className="mb-4">現在、本サービスおよびDDR Score Managerの運営のため、以下のコストを自腹で支払っています。</p>
                 <ul className="list-disc list-inside mb-4 space-y-2 pl-4">
                     <li>App Storeの年間登録料：年間約15,000円</li>
                     <li>サーバー管理費：年間7,500円</li>
@@ -31,7 +31,7 @@ const SupportUsPage = () => {
                                 <li><a href="https://ofuse.me/40c38ab9"
                                     className="text-blue-600 hover:underline"
                                     target="_blank"
-                                    rel="noopener noreferrer">OFUSE</a>：単発の投げ銭サービスです</li>
+                                    rel="noopener noreferrer">OFUSE</a>：単発の投げ銭サービスです。月額支援もあります</li>
                                 <li><a href="https://fantia.jp/fanclubs/522386"
                                     className="text-blue-600 hover:underline"
                                     target="_blank"
