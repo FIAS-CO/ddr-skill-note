@@ -1,8 +1,6 @@
-// https://www.sukerou.com/2023/01/react-adsense.html
-
 import { useEffect } from 'react'
 
-const hostname = "flarenote.fia-s.com"  //本番サイトのホスト名
+const hostname = "example.com"  //本番サイトのホスト名
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -27,9 +25,10 @@ function Adsense() {
           <ins className="adsbygoogle"
             style={{ display: "block", textAlign: "center" }}
             data-ad-layout="in-article"
-            data-ad-format="fluid"
-            data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-            data-ad-slot="XXXXXXXXX"></ins>
+            data-ad-format="auto"
+            data-ad-client="ca-pub-8151928728657048"
+            data-ad-slot="5127709417"
+            data-full-width-responsive="true"></ins>
         ) :
         (
           <div style={{ padding: "10px", border: "1px solid #333" }}>
