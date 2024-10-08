@@ -26,11 +26,11 @@ const NavBar: React.FC = () => {
                   Song Ranking
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link to="/support-us" className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                   Support Us
                 </Link>
-              </li> */}
+              </li>
             </ul>
           </div>
         </div>

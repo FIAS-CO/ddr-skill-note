@@ -25,7 +25,7 @@ function App() {
             path="/song-ranking/:grade"
             element={<Navigate to="/song-ranking" replace />}
           />
-          <Route path="/supportus" element={<SupportUsPage />} />
+          <Route path="/support-us" element={<SupportUsPage />} />
         </Routes>
       </div>
     </Router>
