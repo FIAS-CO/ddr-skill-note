@@ -7,6 +7,7 @@ import SongRankingPage from './components/SongRankingPage';
 import HomePage from './components/HomePage';
 import useWindowSize from './util/UseWindowSize';
 import SupportUsPage from './components/supportus/SupportUsPage';
+import SongDetailPage from './components/songdetail/SongDetailPage';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             path="/song-ranking/:grade"
             element={<Navigate to="/song-ranking" replace />}
           />
+          <Route path="/song-detail/:songId" element={<SongDetailPage />} />
           <Route path="/support-us" element={<SupportUsPage />} />
         </Routes>
       </div>
