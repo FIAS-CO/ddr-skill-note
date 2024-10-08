@@ -1,0 +1,31 @@
+name: Auto Deploy
+
+on:
+  push:
+    branches: [ main ]  # mainブランチにプッシュされた時に実行
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    - name: Deploy to Server
+      env:
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      run: |
+        ssh $SERVER_USER@$SERVER_IP << EOF
+          cd $DEPLOY_PATH
+          git pull origin main
+          npm install
+          npm run build
+          pm2 restart your-app-name  # あなたのアプリ名に置き換えてください
+        EOF
