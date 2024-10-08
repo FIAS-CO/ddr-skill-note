@@ -6,6 +6,7 @@ import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 import RankingSongTable from './SongRankingTable';
 import useWindowSize from '../util/UseWindowSize';
 import { useParams } from 'react-router-dom';
+import Adsense from '../adsense/Adsense';
 
 const SongRankingPage: React.FC = () => {
   const { grade } = useParams<{ grade?: string }>();
@@ -98,6 +99,9 @@ const SongRankingPage: React.FC = () => {
         activeTab={activeTab}
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
       />
+
+      <Adsense />
+
       {['CLASSIC', 'WHITE', 'GOLD'].map((category) => {
         const songs = currentRankingSongs[category as keyof typeof currentRankingSongs];
         if (!songs || songs.length === 0) {
