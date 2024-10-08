@@ -25,11 +25,6 @@ jobs:
         ssh $SERVER_USER@$SERVER_IP << EOF
           cd $DEPLOY_PATH
           git pull origin main
+          /root/.nvm/versions/node/v20.17.0/bin/npm install
+          /root/.nvm/versions/node/v20.17.0/bin/npm run publish
         EOF
-        
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run publish
