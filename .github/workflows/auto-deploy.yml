@@ -26,6 +26,5 @@ jobs:
           cd $DEPLOY_PATH
           git pull origin main
           npm install
-          npm run build
-          pm2 restart your-app-name  # あなたのアプリ名に置き換えてください
+          npm run publish
         EOF
