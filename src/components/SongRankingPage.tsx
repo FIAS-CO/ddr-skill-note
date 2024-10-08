@@ -82,7 +82,7 @@ const SongRankingPage: React.FC = () => {
       <div className="flex items-center justify-between mb-8">
 
         <div className="w-10"> {/* 左側の空白スペース */}</div>
-        <h1 className="text-3xl font-bold text-center mb-8">グレード別・カテゴリ別人気曲一覧x</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">グレード別・カテゴリ別人気曲一覧</h1>
 
         <button
           onClick={shareToX}
