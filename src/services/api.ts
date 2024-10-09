@@ -87,6 +87,33 @@ export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> 
     }
 };
 
+interface ScoreDistribution {
+    minScore: number;
+    maxScore: number;
+    distribution: Array<{ scoreLowerBound: number; count: number }>;
+}
+
+interface ScoreDistributionResult {
+    songId: number;
+    chartType: string;
+    songName: string;
+    scoreDistributions: {
+        EX: ScoreDistribution;
+        IX: ScoreDistribution;
+    };
+}
+
+export const getScoreDistoribution = async (songId: string, chartType: string): Promise<ScoreDistributionResult> => {
+    try {
+        const response = await api.get<ScoreDistributionResult>(`/api/songs/${songId}/score-distribution/${chartType}`);
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ranking songs:', error);
+        throw error;
+    }
+}
+
 export interface UserListItem {
     id: string;
     name: string;
