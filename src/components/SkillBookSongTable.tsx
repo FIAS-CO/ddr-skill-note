@@ -18,7 +18,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             key: null,
             sortable: false,
             render: (_, index) => <span className="font-medium dark:text-gray-300">{index + 1}</span>,
-            className: 'w-[24px] md:w-12 px-1 md:px-2 text-left'
+            className: 'w-[16px] md:w-12 px-0 md:px-2 text-left'
         },
         {
             header: 'Title',
@@ -58,7 +58,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
                         {song.level}
                     </span>
                 ),
-                className: 'w-12 px-1 text-left'
+                className: 'w-4 px-0 text-left'
             }
         ]) as ColumnConfig<SkillBookSong>[],
         {
@@ -67,27 +67,27 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             sortable: true,
             sortType: 'number',
             render: (song) => (
-                <span className="px-1 md:px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
+                <span className="px-0 md:px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100">
                     {convertToFlareRankString(song.flareRank)}
                 </span>
             ),
-            className: 'w-6 md:w-12 px-1 md:px-2 text-left'
+            className: 'w-4 md:w-12 px-0 md:px-2 text-left'
         },
         {
             header: isMobile ? 'FS' : 'Flare Skill',
             key: 'flareSkill',
             sortable: true,
             sortType: 'number',
-            render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400">{song.flareSkill}</span>,
-            className: 'w-8 md:w-12 px-1 md:px-2 text-left'
+            render: (song) => <span className="font-medium text-indigo-600 dark:text-indigo-400" >{song.flareSkill}</span>,
+            className: 'w-8 md:w-12 px-0 md:px-2 text-left'
         },
         {
             header: 'Score',
             key: 'score',
             sortable: true,
             sortType: 'number',
-            render: (song) => <span className="text-gray-600 dark:text-gray-400">{song.score.toLocaleString()}</span>,
-            className: 'w-16 md:w-16 px-1 md:px-2 text-left'
+            render: (song) => <span className={`text-gray-600 dark:text-gray-400 ${isMobile ? ' text-xs' : ''}`} >{song.score.toLocaleString()}</span>,
+            className: 'w-10 md:w-16 px-0 md:px-2 text-left'
         },
     ];
 
@@ -97,7 +97,7 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             columns={columns}
             initialSortKey="flareSkill"
             initialSortDirection="desc"
-            tableClassName="border-collapse w-full"
+            tableClassName={`border-collapse w-full ${isMobile ? 'table-fixed' : ''}`}
             headerClassName="bg-gray-50 dark:bg-gray-700"
             rowClassName="hover:bg-gray-50 dark:hover:bg-gray-700"
             getBackgroundClass={getChartTypeBackgroundClass}
