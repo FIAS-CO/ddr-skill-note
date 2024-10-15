@@ -1,4 +1,5 @@
 export interface BaseSong {
+  id: number;
   title: string;
   level: number;
   chartType: string;

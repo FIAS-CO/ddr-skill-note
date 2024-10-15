@@ -3,6 +3,7 @@ import SongTableBase, { ColumnConfig } from './SongTableBase';
 import { SkillBookSong } from './SkillBookSongRow';
 import useWindowSize from '../util/UseWindowSize';
 import { getChartTypeBackgroundClass, convertToFlareRankString } from '../util/DdrDefinitionUtil';
+import { Link } from 'react-router-dom';
 
 interface SkillBookSongTableProps {
     songs: SkillBookSong[];
@@ -25,8 +26,16 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             key: 'title',
             sortable: true,
             render: (song) => (
-                <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm">
-                    <span className="break-word whitespace-normal">{song.title}</span>
+                <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm group relative">
+                    <Link
+                        to={`/song-detail/${song.id}/${song.chartType}`}
+                        className="break-words whitespace-normal hover:text-blue-600 dark:hover:text-blue-400 border-b border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors duration-300"
+                    >
+                        {song.title}
+                    </Link>
+                    <span className="absolute top-full left-0 mt-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                        統計情報を見る
+                    </span>
                 </div>
             ),
             className: 'w-24 md:w-1/3 px-0 md:px-2 text-left'
