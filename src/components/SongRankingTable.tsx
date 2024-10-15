@@ -30,6 +30,8 @@ const RankingSongTable: React.FC<RankingSongTableProps> = ({ songs }) => {
                 <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm group relative">
                     <Link
                         to={`/song-detail/${song.id}/${song.chartType}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="break-words whitespace-normal hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-200 border-b border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors duration-300"
                     >
                         {song.title}
