@@ -23,4 +23,9 @@ function useWindowSize() {
     return windowSize;
 }
 
+export function useCheckIsMobile() {
+    var windowWidth = useWindowSize();
+    return windowWidth.width < 768;
+}
+
 export default useWindowSize;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useCheckIsMobile } from '../../util/UseWindowSize';
 
 interface ScoreDistributionChartProps {
     data: Array<{ scoreLowerBound: number; count: number }>;
@@ -8,6 +9,9 @@ interface ScoreDistributionChartProps {
 }
 
 const ScoreDistributionChart: React.FC<ScoreDistributionChartProps> = ({ data, title, minScore }) => {
+
+    const isMobile = useCheckIsMobile();
+    console.log(`isMobile:${isMobile}`)
     const formatXAxis = (tickItem: number): string => `${tickItem.toLocaleString()}~`;
     return (
         <div className="w-full max-w-4xl mx-auto space-y-4">
@@ -15,7 +19,7 @@ const ScoreDistributionChart: React.FC<ScoreDistributionChartProps> = ({ data, t
             <p className="text-sm text-gray-600">
                 Minimum Score: {minScore.toLocaleString()}
             </p>
-            <div className="w-[600px] h-[50vh] min-h-[300px] max-h-[600px]">
+            <div className={`${isMobile ? 'w-[300px]' : 'w-[600px]'} h-[50vh] min-h-[300px] max-h-[600px]`}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         data={data}

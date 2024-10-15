@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { getScoreDistoribution, getSkillBookSongs, getStats } from '../../services/api';
+import { Link, useParams } from 'react-router-dom';
+import { getScoreDistoribution } from '../../services/api';
 import { useState } from 'react';
 import ScoreDistributionChart from './ScoreDistoributionChart';
+import { useCheckIsMobile } from '../../util/UseWindowSize';
 
-const VALID_CHART_TYPES = ['BSP', 'DSP', 'ESP', 'CSP', 'BDP', 'DDP', 'EDP', 'CDP'] as const;
+const VALID_CHART_TYPES = ['BESP', 'BSP', 'DSP', 'ESP', 'CSP', 'BDP', 'DDP', 'EDP', 'CDP'] as const;
 type ValidChartType = typeof VALID_CHART_TYPES[number];
 
 function isValidChartType(chartType: string): chartType is ValidChartType {
@@ -47,10 +48,13 @@ const SongDetailPage: React.FC = () => {
     const { chartType, error } = useChartTypeParam();
 
     const [songName, setSongName] = useState<string | null>(null);
+    const [songLevel, setSongLevel] = useState<number | null>(null);
     const [exDistoribution, setExDistoribution] = useState<ScoreDistribution>();
-    const [ivDistoribution, setIxDistoribution] = useState<ScoreDistribution>();
+    const [ixDistoribution, setIxDistoribution] = useState<ScoreDistribution>();
     const [error2, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isNoChart, setIsNoChart] = useState(true);
+    const isMobile = useCheckIsMobile();
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -65,6 +69,8 @@ const SongDetailPage: React.FC = () => {
                 const distoribution = await getScoreDistoribution(songId, chartType);
 
                 setSongName(distoribution.songName);
+                setSongLevel(distoribution.songLevel);
+                setIsNoChart(distoribution.songLevel === 0)
                 setExDistoribution(distoribution.scoreDistributions.EX);
                 setIxDistoribution(distoribution.scoreDistributions.IX);
             } catch (error) {
@@ -75,24 +81,53 @@ const SongDetailPage: React.FC = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [chartType]);
 
     if (error) {
         return <ErrorPage message={error} />;
     }
+    if (error2) {
+        return <ErrorPage message={error2} />;
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-                {songName} / {chartType}
+                {songName} / {chartType}({songLevel})
             </h1>
-            <div className="w-full">
-                <ScoreDistributionChart
-                    data={exDistoribution?.distribution ?? []}
-                    title={"Flare EX"}
-                    minScore={exDistoribution?.minScore ?? 0}
-                />
+            <div className="flex flex-wrap justify-center mb-8">
+                {VALID_CHART_TYPES.map((type) => (
+                    <Link
+                        key={type}
+                        to={`/song-detail/${songId}/${type}`}
+                        className={`flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2 mx-1 sm:mx-2 mb-2 rounded text-xs sm:text-sm md:text-base text-white ${chartType === type ? 'bg-blue-500' : 'bg-gray-500'
+                            } w-[calc(20%-0.5rem)] sm:w-auto`}
+                    >
+                        {type}
+                    </Link>
+                ))}
             </div>
+
+            {isNoChart ? <div>No Chart "{chartType}"</div> :
+                <div className="w-full">
+                    <ScoreDistributionChart
+                        data={exDistoribution?.distribution ?? []}
+                        title={"Flare EX"}
+                        minScore={exDistoribution?.minScore ?? 0}
+                    />
+
+                    <ScoreDistributionChart
+                        data={ixDistoribution?.distribution ?? []}
+                        title={"Flare IX"}
+                        minScore={ixDistoribution?.minScore ?? 0}
+                    />
+
+                </div>
+            }
         </div>
     );
 }

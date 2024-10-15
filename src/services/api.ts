@@ -97,6 +97,7 @@ interface ScoreDistributionResult {
     songId: number;
     chartType: string;
     songName: string;
+    songLevel: number;
     scoreDistributions: {
         EX: ScoreDistribution;
         IX: ScoreDistribution;
