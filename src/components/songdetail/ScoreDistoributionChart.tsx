@@ -19,7 +19,7 @@ const ScoreDistributionChart: React.FC<ScoreDistributionChartProps> = ({ data, t
             <p className="text-sm text-gray-600">
                 Minimum Score: {minScore.toLocaleString()}
             </p>
-            <div className={`${isMobile ? 'w-[300px]' : 'w-[600px]'} h-[50vh] min-h-[300px] max-h-[600px]`}>
+            <div className={`${isMobile ? 'w-[300px]' : 'w-[600px]'} h-[300px] min-h-[300px]`}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         data={data}
