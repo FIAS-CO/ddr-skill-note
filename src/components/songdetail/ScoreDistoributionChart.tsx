@@ -36,8 +36,11 @@ const ScoreDistributionChart: React.FC<ScoreDistributionChartProps> = ({ data, t
                         />
                         <Tooltip
                             formatter={(value) => [value, "Player Count"]}
-                            labelFormatter={(label) => `Score: ${label.toLocaleString()}~`}
-                        />
+                            labelFormatter={(label) => (
+                                <span style={{ color: 'black' }}>
+                                    {`Score: ${(label as number).toLocaleString()}~`}
+                                </span>
+                            )} />
                         <Bar dataKey="count" fill="#8884d8" />
                     </BarChart>
                 </ResponsiveContainer>
