@@ -6,7 +6,7 @@ import { getRankingSongs, RankingSongsSpDp } from '../services/api';
 import RankingSongTable from './SongRankingTable';
 import useWindowSize from '../util/UseWindowSize';
 import { useParams } from 'react-router-dom';
-import Adsense from '../adsense/Adsense';
+import { SongRankingAdBanner } from '../adsense/AdsenseBanner';
 
 const SongRankingPage: React.FC = () => {
   const { grade } = useParams<{ grade?: string }>();
@@ -100,7 +100,7 @@ const SongRankingPage: React.FC = () => {
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
       />
 
-      <Adsense />
+      <SongRankingAdBanner />
 
       {['CLASSIC', 'WHITE', 'GOLD'].map((category) => {
         const songs = currentRankingSongs[category as keyof typeof currentRankingSongs];

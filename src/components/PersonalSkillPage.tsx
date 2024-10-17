@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Tab from './Tab';
 import SkillBookSongTable from './SkillBookSongTable';
 import useWindowSize from '../util/UseWindowSize';
+import { SkillNoteAdBanner } from '../adsense/AdsenseBanner';
 
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
@@ -100,6 +101,7 @@ const PersonalSkillPage: React.FC = () => {
           {!isMobile ? '共有' : ''}
         </button>
       </div>
+      <SkillNoteAdBanner />
       <Tab
         activeTab={activeTab}
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
