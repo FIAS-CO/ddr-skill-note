@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useCheckIsMobile } from '../util/UseWindowSize';
 
 // 定数としての広告スロットID
 const SkillNoteAdSlot = "9539196325";
@@ -14,6 +15,8 @@ declare global {
 
 // 引数adSlotでdata-ad-slotを切り替える
 function AdsenseBanner({ adSlot }: { adSlot: string }) {
+    const isMobile = useCheckIsMobile();
+
     useEffect(() => {
         if (window.location.hostname === hostname) {
             // AdSenseスクリプトの初期化
@@ -38,9 +41,9 @@ function AdsenseBanner({ adSlot }: { adSlot: string }) {
                 <ins className="adsbygoogle"
                     style={{
                         display: "inline-block",
-                        width: "100%",    // 横幅を100%にして画面に収める
-                        height: "auto",   // 高さを自動調整
-                        textAlign: "center" // 広告を中央寄せ
+                        width: isMobile ? "320px" : "100%",    // モバイルの場合は320pxの横幅を指定
+                        height: isMobile ? "100px" : "auto",   // モバイルの場合は100pxの高さを指定
+                        textAlign: "center"                    // 広告を中央寄せ
                     }}
                     data-ad-layout="in-article"
                     data-ad-format="auto"
