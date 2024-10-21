@@ -42,6 +42,7 @@ interface ScoreDistribution {
     distribution: Array<{ scoreLowerBound: number; count: number }>;
 }
 
+const hostname = "flarenote.fia-s.com";
 const SongDetailPage: React.FC = () => {
 
     const { songId } = useParams<{ songId: string }>();
@@ -81,6 +82,21 @@ const SongDetailPage: React.FC = () => {
             }
         };
         fetchData();
+
+        if (window.location.hostname === hostname) {
+            // AdSenseスクリプトの初期化
+            const adsbygoogle = document.createElement('script');
+            adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+            adsbygoogle.async = true;
+            adsbygoogle.crossOrigin = "anonymous";
+            document.head.appendChild(adsbygoogle);
+
+            // DOMが更新された後にAdSenseを再実行
+            window.adsbygoogle = window.adsbygoogle || [];
+            setTimeout(() => {
+                window.adsbygoogle.push({});
+            }, 1000);
+        }
     }, [chartType]);
 
     if (error) {
