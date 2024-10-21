@@ -86,7 +86,7 @@ const SongDetailPage: React.FC = () => {
         if (window.location.hostname === hostname) {
             // AdSenseスクリプトの初期化
             const adsbygoogle = document.createElement('script');
-            adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+            adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8151928728657048";
             adsbygoogle.async = true;
             adsbygoogle.crossOrigin = "anonymous";
             document.head.appendChild(adsbygoogle);

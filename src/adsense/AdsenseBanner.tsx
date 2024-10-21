@@ -21,7 +21,7 @@ function AdsenseBanner({ adSlot }: { adSlot: string }) {
         if (window.location.hostname === hostname) {
             // AdSenseスクリプトの初期化
             const adsbygoogle = document.createElement('script');
-            adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+            adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8151928728657048";
             adsbygoogle.async = true;
             adsbygoogle.crossOrigin = "anonymous";
             document.head.appendChild(adsbygoogle);
@@ -35,31 +35,31 @@ function AdsenseBanner({ adSlot }: { adSlot: string }) {
     }, []);
 
     return (
-        // (!isMobile) ? (
-        <div style={{ margin: "1.5rem 0" }}>
-            <div style={{ fontSize: "13px" }}>スポンサーリンク</div>
-            {window.location.hostname === hostname ? (
-                <ins className="adsbygoogle"
-                    style={{
-                        display: "inline-block",
-                        width: "100%",
-                        height: "auto",
-                        textAlign: "center"                    // 広告を中央寄せ
-                    }}
-                    data-ad-layout="in-article"
-                    data-ad-format="auto"
-                    data-ad-client="ca-pub-8151928728657048"
-                    data-ad-slot={adSlot} // 動的にadSlotを設定
-                    data-full-width-responsive="true"></ins>
-            ) : (
-                <div style={{ padding: "10px", border: "1px solid #333" }}>
-                    広告
-                </div>
-            )}
-        </div>
-        // ) : (
-        //     <div />
-        // )
+        (!isMobile) ? (
+            <div style={{ margin: "1.5rem 0" }}>
+                <div style={{ fontSize: "13px" }}>スポンサーリンク</div>
+                {window.location.hostname === hostname ? (
+                    <ins className="adsbygoogle"
+                        style={{
+                            display: "inline-block",
+                            width: "100%",
+                            height: "auto",
+                            textAlign: "center"                    // 広告を中央寄せ
+                        }}
+                        data-ad-layout="in-article"
+                        data-ad-format="auto"
+                        data-ad-client="ca-pub-8151928728657048"
+                        data-ad-slot={adSlot} // 動的にadSlotを設定
+                        data-full-width-responsive="true"></ins>
+                ) : (
+                    <div style={{ padding: "10px", border: "1px solid #333" }}>
+                        広告
+                    </div>
+                )}
+            </div>
+        ) : (
+            <div />
+        )
     );
 }
 
