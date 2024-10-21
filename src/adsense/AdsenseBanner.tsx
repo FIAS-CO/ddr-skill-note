@@ -18,7 +18,7 @@ function AdsenseBanner({ adSlot }: { adSlot: string }) {
     const isMobile = useCheckIsMobile();
 
     useEffect(() => {
-        if (window.location.hostname === hostname && !isMobile) {
+        if (window.location.hostname === hostname) {
             // AdSenseスクリプトの初期化
             const adsbygoogle = document.createElement('script');
             adsbygoogle.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
