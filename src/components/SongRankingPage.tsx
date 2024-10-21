@@ -7,7 +7,9 @@ import RankingSongTable from './SongRankingTable';
 import useWindowSize from '../util/UseWindowSize';
 import { useParams } from 'react-router-dom';
 import { SongRankingAdBanner } from '../adsense/AdsenseBanner';
+import CategoryTab from './CategoryTab';
 
+type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const SongRankingPage: React.FC = () => {
   const { grade } = useParams<{ grade?: string }>();
   const [selectedGrade, setSelectedGrade] = useState(grade || 'WORLD');
@@ -15,6 +17,7 @@ const SongRankingPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
+  const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryTabKey>('CLASSIC');
   const { width } = useWindowSize();
   const isMobile = width < 768; // md breakpoint in Tailwind
 
@@ -76,6 +79,7 @@ const SongRankingPage: React.FC = () => {
   }
 
   const currentRankingSongs = rankingSongs ? rankingSongs[activeTab] : { CLASSIC: [], WHITE: [], GOLD: [] };
+  const currentCategorySongs = currentRankingSongs[activeCategoryTab as keyof typeof currentRankingSongs];
 
   return (
     <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
@@ -102,23 +106,24 @@ const SongRankingPage: React.FC = () => {
 
       <SongRankingAdBanner />
 
-      {['CLASSIC', 'WHITE', 'GOLD'].map((category) => {
-        const songs = currentRankingSongs[category as keyof typeof currentRankingSongs];
-        if (!songs || songs.length === 0) {
-          return (
-            <div key={category} className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">{category}</h2>
-              <p>No songs available for this category.</p>
-            </div>
-          );
-        }
-        return (
-          <div key={category} className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">{category}</h2>
-            <RankingSongTable songs={songs} />
+      <CategoryTab
+        activeTab={activeCategoryTab}
+        onTabChange={setActiveCategoryTab}
+      />
+
+      {(!currentCategorySongs || currentCategorySongs.length === 0) ? (
+        <div key={activeCategoryTab} className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">{activeCategoryTab}</h2>
+          <p>No songs available for this category.</p>
+        </div>
+      ) :
+        (
+          <div key={activeCategoryTab} className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">{activeCategoryTab}</h2>
+            <RankingSongTable songs={currentCategorySongs} />
           </div>
-        );
-      })}
+        )
+      }
     </div>
   );
 };
