@@ -7,7 +7,10 @@ import Tab from './Tab';
 import SkillBookSongTable from './SkillBookSongTable';
 import useWindowSize from '../util/UseWindowSize';
 import { SkillNoteAdBanner } from '../adsense/AdsenseBanner';
+import CategoryTab from './CategoryTab';
 
+// TODO 共通化したい
+type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
   const [stats, setStats] = useState<PlayerStats | null>(null);
@@ -15,6 +18,7 @@ const PersonalSkillPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
+  const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryTabKey>('CLASSIC');
 
   const { width } = useWindowSize();
   const isMobile = width < 768; // md breakpoint in Tailwind
@@ -55,7 +59,7 @@ const PersonalSkillPage: React.FC = () => {
       .sort((a, b) => b.flareSkill - a.flareSkill) // flareSkillの降順でソート
       .slice(0, 30) // 上位30曲を選択
       .reduce((total, song) => total + song.flareSkill, 0); // 選択された曲のflareSkillを合計
-
+    console.log(`display player skill - ${playStyle}/${category}`)
     return (
       <div key={`${playStyle}-${category}`} className="mb-8">
         <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
@@ -106,6 +110,7 @@ const PersonalSkillPage: React.FC = () => {
         activeTab={activeTab}
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
       />
+
       {stats[activeTab] && (
         <StatsOverview
           totalFlareSkill={stats[activeTab].totalFlareSkill}
@@ -113,9 +118,13 @@ const PersonalSkillPage: React.FC = () => {
           playStyle={activeTab}
         />
       )}
-      {renderCategoryTable('CLASSIC', activeTab)}
-      {renderCategoryTable('WHITE', activeTab)}
-      {renderCategoryTable('GOLD', activeTab)}
+
+      <CategoryTab
+        activeTab={activeCategoryTab}
+        onTabChange={setActiveCategoryTab}
+      />
+
+      {renderCategoryTable(activeCategoryTab, activeTab)}
     </div>
   );
 };
