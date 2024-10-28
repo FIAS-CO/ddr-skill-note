@@ -41,7 +41,7 @@ const SongTable: React.FC<SongTableProps> = ({ songs, type }) => {
   const getSortValue = (song: RankingSong | SkillBookSong, key: SortKey): any => {
     switch (key) {
       case 'flareRank':
-        return flareRankOrder.indexOf(song.flareRank);
+        return flareRankOrder.indexOf(song.flareRank.toString());
       case 'level':
         return Number(song.level);
       case 'overallPercentage':

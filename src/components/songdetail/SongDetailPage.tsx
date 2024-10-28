@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getScoreDistoribution } from '../../services/api';
+import { getScoreDistoribution, getSongMetadata } from '../../services/api';
 import { useState } from 'react';
 import ScoreDistributionChart from './ScoreDistoributionChart';
 import { useCheckIsMobile } from '../../util/UseWindowSize';
+import { ChartType } from '../../types/Types';
+import { NominatedRanking } from '../../types/song';
 
 const VALID_CHART_TYPES = ['BESP', 'BSP', 'DSP', 'ESP', 'CSP', 'BDP', 'DDP', 'EDP', 'CDP'] as const;
 type ValidChartType = typeof VALID_CHART_TYPES[number];
@@ -44,12 +46,14 @@ interface ScoreDistribution {
 
 const hostname = "flarenote.fia-s.com";
 const SongDetailPage: React.FC = () => {
-
     const { songId } = useParams<{ songId: string }>();
     const { chartType, error } = useChartTypeParam();
 
     const [songName, setSongName] = useState<string | null>(null);
     const [songLevel, setSongLevel] = useState<number | null>(null);
+    const [songVersion, setSongVersion] = useState<string | null>(null);
+    const [songCategory, setSongCategory] = useState<string | null>(null);
+    const [rankingInfo, setRankingInfo] = useState<NominatedRanking[] | null>(null);
     const [exDistoribution, setExDistoribution] = useState<ScoreDistribution>();
     const [ixDistoribution, setIxDistoribution] = useState<ScoreDistribution>();
     const [error2, setError] = useState<string | null>(null);
@@ -57,32 +61,8 @@ const SongDetailPage: React.FC = () => {
     const [isNoChart, setIsNoChart] = useState(true);
     const isMobile = useCheckIsMobile();
 
+
     React.useEffect(() => {
-        const fetchData = async () => {
-            if (!songId || !chartType) {
-                setError('ユーザーID/譜面タイプが提供されていません');
-                setIsLoading(false);
-                return;
-            }
-            setIsLoading(true);
-            setError(null);
-            try {
-                const distoribution = await getScoreDistoribution(songId, chartType);
-
-                setSongName(distoribution.songName);
-                setSongLevel(distoribution.songLevel);
-                setIsNoChart(distoribution.songLevel === 0)
-                setExDistoribution(distoribution.scoreDistributions.EX);
-                setIxDistoribution(distoribution.scoreDistributions.IX);
-            } catch (error) {
-                console.error('データの取得中にエラーが発生しました:', error);
-                setError('ユーザーデータの読み込みに失敗しました。後でもう一度お試しください。');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchData();
-
         if (window.location.hostname === hostname) {
             // AdSenseスクリプトの初期化
             const adsbygoogle = document.createElement('script');
@@ -97,13 +77,43 @@ const SongDetailPage: React.FC = () => {
                 window.adsbygoogle.push({});
             }, 1000);
         }
-    }, [chartType]);
+    }, [])
 
-    if (error) {
-        return <ErrorPage message={error} />;
-    }
-    if (error2) {
-        return <ErrorPage message={error2} />;
+    React.useEffect(() => {
+        const fetchData = async () => {
+            if (!songId || !chartType) {
+                setError('ユーザーID/譜面タイプが提供されていません');
+                setIsLoading(false);
+                return;
+            }
+            setIsLoading(true);
+            setError(null);
+            try {
+
+                const metadata = await getSongMetadata(songId, chartType as ChartType)
+                const distoribution = await getScoreDistoribution(songId, chartType);
+
+                setSongName(metadata.name);
+                setSongLevel(metadata.level);
+                setIsNoChart(metadata.level === 0)
+                setSongVersion(metadata.version)
+                setSongCategory(metadata.category)
+                setRankingInfo(metadata.nominatedRanking)
+
+                setExDistoribution(distoribution.scoreDistributions.EX);
+                setIxDistoribution(distoribution.scoreDistributions.IX);
+            } catch (error) {
+                console.error('データの取得中にエラーが発生しました:', error);
+                setError('ユーザーデータの読み込みに失敗しました。後でもう一度お試しください。');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, [songId, chartType]);
+
+    if (error || error2) {
+        return <ErrorPage message={error || error2 || '不明なエラーが発生しました'} />;
     }
 
     if (isLoading) {
@@ -112,9 +122,10 @@ const SongDetailPage: React.FC = () => {
 
     return (
         <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
-            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-                {songName} / {chartType}({songLevel})
+            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+                {songName}
             </h1>
+
             <div className="flex flex-wrap justify-center mb-8">
                 {VALID_CHART_TYPES.map((type) => (
                     <Link
@@ -128,24 +139,58 @@ const SongDetailPage: React.FC = () => {
                 ))}
             </div>
 
-            {isNoChart ? <div>No Chart "{chartType}"</div> :
+            <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h2 className="text-xl font-semibold mb-2">楽曲情報</h2>
+                        <ul className="space-y-2">
+                            <li>
+                                <span className="font-medium">譜面タイプ:</span> {chartType}
+                            </li>
+                            <li>
+                                <span className="font-medium">レベル:</span> {songLevel}
+                            </li>
+                            <li>
+                                <span className="font-medium">バージョン:</span> {songVersion}
+                            </li>
+                            <li>
+                                <span className="font-medium">カテゴリ:</span> {songCategory}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 className="text-xl font-semibold mb-2">対象頻度が高いグレード</h2>
+                        <div>
+                            <ul className="space-y-2">
+                                {(rankingInfo) ? rankingInfo.map((info, index) => (
+                                    <li key={index}>
+                                        {info.grade} / Flare {info.flareRank} {info.overallPercentage.toFixed(2)}%
+                                    </li>
+                                )) : <div />}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {isNoChart ? (
+                <div className="text-center text-gray-600">No Chart "{chartType}"</div>
+            ) : (
                 <div className="w-full">
                     <ScoreDistributionChart
                         data={exDistoribution?.distribution ?? []}
                         title={"Flare EX"}
                         minScore={exDistoribution?.minScore ?? 0}
                     />
-
                     <ScoreDistributionChart
                         data={ixDistoribution?.distribution ?? []}
                         title={"Flare IX"}
                         minScore={ixDistoribution?.minScore ?? 0}
                     />
-
                 </div>
-            }
+            )}
         </div>
     );
-}
+};
 
 export default SongDetailPage;

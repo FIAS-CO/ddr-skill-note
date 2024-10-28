@@ -2,6 +2,8 @@ import axios from 'axios';
 import { SkillBookSong } from '../components/SkillBookSongRow';
 import { RankingSong } from '../components/RankingSongRow';
 import { calculateFlareSkill } from '../util/DdrDefinitionUtil';
+import { ChartType } from '../types/Types';
+import { SongMetadata } from '../types/song';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 console.log('API_BASE_URL:', API_BASE_URL); // デバッグ用
@@ -85,6 +87,11 @@ export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> 
         console.error('Error fetching ranking songs:', error);
         throw error;
     }
+};
+
+export const getSongMetadata = async (songId: string, chartType: ChartType): Promise<SongMetadata> => {
+    const response = await api.get<SongMetadata>(`/api/songs/${songId}/metadata/${chartType}`);
+    return response.data;
 };
 
 interface ScoreDistribution {
