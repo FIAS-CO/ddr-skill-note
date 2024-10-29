@@ -1,6 +1,8 @@
 export const CHART_TYPES = ['BESP', 'BSP', 'DSP', 'ESP', 'CSP', 'BDP', 'DDP', 'EDP', 'CDP'] as const;
 export type ChartType = typeof CHART_TYPES[number];
-export type PlayStyle = 'SP' | 'DP';
+
+export const PLAY_STYLE = ['SP', 'DP'] as const;
+export type PlayStyle = typeof PLAY_STYLE[number];
 
 export const CATEGORY = ['CLASSIC', 'WHITE', 'GOLD'] as const;
 export type Category = typeof CATEGORY[number];

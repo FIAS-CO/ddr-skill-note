@@ -13,10 +13,10 @@ const api = axios.create({
 });
 
 export interface CategorizedSongs {
-    SP: PlayStyle;
-    DP: PlayStyle;
+    SP: CategorizedSkillBookSongs;
+    DP: CategorizedSkillBookSongs;
 }
-export interface PlayStyle {
+export interface CategorizedSkillBookSongs {
     CLASSIC: SkillBookSong[];
     WHITE: SkillBookSong[];
     GOLD: SkillBookSong[];
@@ -33,8 +33,17 @@ export interface Stats {
 }
 
 export interface PlayerStats {
+    createdAt: string;
+    updatedAt: string;
     SP: Stats;
     DP: Stats;
+    skillHistory: SkillHistoryPoint[]
+}
+
+export interface SkillHistoryPoint {
+    date: string; //グリニッジ標準時
+    spSkillPoint: number;
+    dpSkillPoint: number;
 }
 
 export const getStats = async (userId: string): Promise<PlayerStats> => {

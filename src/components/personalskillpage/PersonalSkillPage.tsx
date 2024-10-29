@@ -1,24 +1,22 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import StatsOverview from './StatsOverview';
-import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle } from '../../services/api';
+import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats } from '../../services/api';
 import { useParams } from 'react-router-dom';
-import Tab from '../Tab';
 import useWindowSize from '../../util/UseWindowSize';
 import { SkillNoteAdBanner } from '../../adsense/AdsenseBanner';
-import CategoryTab from '../CategoryTab';
-import SkillBookSongTable from './SkillBookSongTable';
+import { Category, PlayStyle } from '../../types/Types';
+import { SkillDisplayTabPage } from './SkillDisplayTabPage';
+import Tab from '../Tab';
 
 // TODO 共通化したい
-type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const PersonalSkillPage: React.FC = () => {
   const { userName } = useParams<{ userName: string }>();
   const [stats, setStats] = useState<PlayerStats | null>(null);
   const [songs, setSongs] = useState<CategorizedSongs | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
-  const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryTabKey>('CLASSIC');
+  const [activeTab, setActiveTab] = useState<PlayStyle>('SP');
+  const [activeCategoryTab, setActiveCategoryTab] = useState<Category>('CLASSIC');
 
   const { width } = useWindowSize();
   const isMobile = width < 768; // md breakpoint in Tailwind
@@ -48,25 +46,6 @@ const PersonalSkillPage: React.FC = () => {
     };
     fetchData();
   }, [userName]);
-
-  const renderCategoryTable = (category: keyof PlayStyle, playStyle: 'SP' | 'DP') => {
-    if (!songs || !songs[playStyle] || !songs[playStyle][category]) {
-      return <div>この{category}カテゴリーにはデータがありません。</div>;
-    }
-    const categorySongs = songs[playStyle][category];
-
-    const categoryTotalFlareSkill = categorySongs
-      .sort((a, b) => b.flareSkill - a.flareSkill) // flareSkillの降順でソート
-      .slice(0, 30) // 上位30曲を選択
-      .reduce((total, song) => total + song.flareSkill, 0); // 選択された曲のflareSkillを合計
-    console.log(`display player skill - ${playStyle}/${category}`)
-    return (
-      <div key={`${playStyle}-${category}`} className="mb-8">
-        <h2 className="text-xl font-bold mb-2">{category} - トータルフレアスキル: {categoryTotalFlareSkill}</h2>
-        <SkillBookSongTable songs={categorySongs} />
-      </div>
-    );
-  };
 
   const shareToX = () => {
     const text = `${userName}さんのフレアスキル帳をチェック！\n#DDR_FlareNote\n`;
@@ -108,25 +87,17 @@ const PersonalSkillPage: React.FC = () => {
       <SkillNoteAdBanner />
       <Tab
         activeTab={activeTab}
-        onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
+        onTabChange={(tab: PlayStyle) => setActiveTab(tab)}
       />
-
-      {stats[activeTab] && (
-        <StatsOverview
-          totalFlareSkill={stats[activeTab].totalFlareSkill}
-          grade={stats[activeTab].grade}
-          playStyle={activeTab}
-        />
-      )}
-
-      <CategoryTab
-        activeTab={activeCategoryTab}
-        onTabChange={setActiveCategoryTab}
+      <SkillDisplayTabPage
+        activeTab={activeTab as PlayStyle}
+        activeCategoryTab={activeCategoryTab}
+        stats={stats}
+        songs={songs}
+        onCategoryTabChange={setActiveCategoryTab}
       />
-
-      {renderCategoryTable(activeCategoryTab, activeTab)}
     </div>
-  );
-};
+  )
+}
 
 export default PersonalSkillPage;

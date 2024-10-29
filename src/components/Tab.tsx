@@ -10,8 +10,8 @@ const Tab: React.FC<TabProps> = ({ activeTab, onTabChange }) => {
     <div className="flex border-b mb-4">
       <button
         className={`py-2 px-4 ${activeTab === 'SP'
-            ? 'border-b-2 border-blue-500 text-blue-500'
-            : 'text-gray-500 hover:text-blue-500'
+          ? 'border-b-2 border-blue-500 text-blue-500'
+          : 'text-gray-500 hover:text-blue-500'
           }`}
         onClick={() => onTabChange('SP')}
       >
@@ -19,8 +19,8 @@ const Tab: React.FC<TabProps> = ({ activeTab, onTabChange }) => {
       </button>
       <button
         className={`py-2 px-4 ${activeTab === 'DP'
-            ? 'border-b-2 border-blue-500 text-blue-500'
-            : 'text-gray-500 hover:text-blue-500'
+          ? 'border-b-2 border-blue-500 text-blue-500'
+          : 'text-gray-500 hover:text-blue-500'
           }`}
         onClick={() => onTabChange('DP')}
       >
