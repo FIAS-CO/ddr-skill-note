@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { BaseSong } from '../types/song';
-import BaseSongRow from './BaseSongRow';
+import { BaseSong } from '../../types/song';
+import BaseSongRow from '../BaseSongRow';
 
 export interface SkillBookSong extends BaseSong {
   score: number;

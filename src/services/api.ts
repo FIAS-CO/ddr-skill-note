@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SkillBookSong } from '../components/SkillBookSongRow';
+import { SkillBookSong } from '../components/personalskillpage/SkillBookSongRow';
 import { RankingSong } from '../components/RankingSongRow';
 import { calculateFlareSkill } from '../util/DdrDefinitionUtil';
 import { ChartType } from '../types/Types';

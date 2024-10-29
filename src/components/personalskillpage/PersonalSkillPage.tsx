@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import StatsOverview from './StatsOverview';
-import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle } from '../services/api';
+import { getSkillBookSongs, getStats, CategorizedSongs, PlayerStats, PlayStyle } from '../../services/api';
 import { useParams } from 'react-router-dom';
-import Tab from './Tab';
+import Tab from '../Tab';
+import useWindowSize from '../../util/UseWindowSize';
+import { SkillNoteAdBanner } from '../../adsense/AdsenseBanner';
+import CategoryTab from '../CategoryTab';
 import SkillBookSongTable from './SkillBookSongTable';
-import useWindowSize from '../util/UseWindowSize';
-import { SkillNoteAdBanner } from '../adsense/AdsenseBanner';
-import CategoryTab from './CategoryTab';
 
 // TODO 共通化したい
 type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RankingSong, RankingSongRow } from './RankingSongRow';
-import SkillBookSongRow, { SkillBookSong } from './SkillBookSongRow';
+import SkillBookSongRow, { SkillBookSong } from './personalskillpage/SkillBookSongRow';
 
 interface SongTableProps {
   songs: (RankingSong | SkillBookSong)[];

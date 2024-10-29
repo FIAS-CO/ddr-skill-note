@@ -1,13 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { SkillBookSongRow, SkillBookSong } from '../../src/components/SkillBookSongRow';
+import { SkillBookSongRow, SkillBookSong } from '../../src/components/personalskillpage/SkillBookSongRow';
 
 describe('SkillBookSongRow', () => {
   const mockSong: SkillBookSong = {
     title: 'Test SkillBook Song',
     level: 14,
-    flareRank: 'A',
+    flareRank: 1,
     score: 980000,
-    flareSkill: 1100
+    flareSkill: 1100,
+    id: 0,
+    chartType: ''
   };
 
   it('renders skillbook song row correctly', () => {

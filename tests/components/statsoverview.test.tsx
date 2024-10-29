@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import StatsOverview from '../../src/components/StatsOverview';
+import StatsOverview from '../../src/components/personalskillpage/StatsOverview';
 
 describe('StatsOverview', () => {
   const mockProps = {
