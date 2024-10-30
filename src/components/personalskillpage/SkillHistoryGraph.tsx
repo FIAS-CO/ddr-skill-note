@@ -34,9 +34,18 @@ export const SkillHistoryGraph: React.FC<SkillHistoryGraphProps> = ({
         }) + ' JST';
     };
 
+    const formatXAxis = (dateStr: string) => {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('ja-JP', {
+            year: '2-digit',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    };
+
     // グラフ用のデータ整形
     const chartData = skillHistory.map(item => ({
-        date: formatDate(item.date).split(' ')[0], // 日付部分のみ使用
+        date: item.date,
         point: (playStyle === 'SP') ? item.spSkillPoint : item.dpSkillPoint
     })).filter(item => (item.point != 0));
 
@@ -48,12 +57,17 @@ export const SkillHistoryGraph: React.FC<SkillHistoryGraphProps> = ({
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                         dataKey="date"
+                        scale="time"
+                        type="number"
+                        domain={['dataMin', 'dataMax']}
+                        tickFormatter={formatXAxis}
                         className="dark:text-gray-300" />
                     <YAxis
                         className="dark:text-gray-300"
                         domain={['auto', 'auto']}
                         tickFormatter={(value) => value.toLocaleString()} />
                     <Tooltip
+                        labelFormatter={formatDate}
                         formatter={(value: number) => value.toLocaleString()} />
                     <Legend />
                     <Line
@@ -61,7 +75,11 @@ export const SkillHistoryGraph: React.FC<SkillHistoryGraphProps> = ({
                         dataKey="point"
                         name="Flare Skill"
                         stroke="#8884d8"
-                        activeDot={{ r: 8 }} />
+                        activeDot={{ r: 8 }}
+                        data={chartData.map(item => ({
+                            date: new Date(item.date).getTime(),
+                            point: item.point
+                        }))} />
                 </LineChart>
             </ResponsiveContainer>
         </div>
