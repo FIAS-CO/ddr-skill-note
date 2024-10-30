@@ -71,7 +71,7 @@ export const SkillHistoryGraph: React.FC<SkillHistoryGraphProps> = ({
                         formatter={(value: number) => value.toLocaleString()} />
                     <Legend />
                     <Line
-                        type="monotone"
+                        type="linear"
                         dataKey="point"
                         name="Flare Skill"
                         stroke="#8884d8"
