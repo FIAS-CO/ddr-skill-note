@@ -22,7 +22,6 @@ export const SkillDisplayTabPage: React.FC<SkillDisplayProps> = ({
     songs,
     onCategoryTabChange,
 }) => {
-
     const [isGraphVisible, setIsGraphVisible] = useState(false);
 
     const renderCategoryTable = (category: keyof CategorizedSkillBookSongs, playStyle: PlayStyle) => {
