@@ -69,3 +69,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* ダークモード用の設定を上書き。ダークモード復活時は消す */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+  select {
+    color: #213547;
+    background-color: #f9f9f9;
+  }
+}
+
