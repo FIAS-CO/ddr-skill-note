@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import GradeSelector from "./RankingSelector";
-import Tab from './Tab';
-import { getRankingSongs, RankingSongsSpDp } from '../services/api';
+import Tab from '../Tab';
+import { getRankingSongs, RankingSongsSpDp } from '../../services/api';
 import RankingSongTable from './SongRankingTable';
-import useWindowSize from '../util/UseWindowSize';
+import useWindowSize from '../../util/UseWindowSize';
 import { useParams } from 'react-router-dom';
-import { SongRankingAdBanner } from '../adsense/AdsenseBanner';
-import CategoryTab from './CategoryTab';
+import { SongRankingAdBanner } from '../../adsense/AdsenseBanner';
+import CategoryTab from '../CategoryTab';
 
 type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const SongRankingPage: React.FC = () => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { RankingSong, RankingSongRow } from './RankingSongRow';
+import { RankingSong, RankingSongRow } from './rankingpage/RankingSongRow';
 import SkillBookSongRow, { SkillBookSong } from './personalskillpage/SkillBookSongRow';
 
 interface SongTableProps {

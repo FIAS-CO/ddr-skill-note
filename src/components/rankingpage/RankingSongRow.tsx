@@ -1,5 +1,5 @@
-import BaseSongRow from "./BaseSongRow";
-import { BaseSong } from "../types/song";
+import BaseSongRow from "../BaseSongRow";
+import { BaseSong } from "../../types/song";
 
 export interface RankingSong extends BaseSong {
   overallPercentage: number;

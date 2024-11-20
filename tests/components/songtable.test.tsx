@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import SongTable from '../../src/components/SongTable'
-import { RankingSong } from '../../src/components/RankingSongRow';
+import { RankingSong } from '../../src/components/rankingpage/RankingSongRow';
 import { SkillBookSong } from '../../src/components/personalskillpage/SkillBookSongRow';
 
 describe('SongTable', () => {
