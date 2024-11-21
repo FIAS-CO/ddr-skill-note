@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import GradeSelector from "./RankingSelector";
 import Tab from '../Tab';
 import { getRankingSongs, RankingSongsSpDp } from '../../services/api';
 import RankingSongTable from './SongRankingTable';
@@ -8,11 +7,11 @@ import useWindowSize from '../../util/UseWindowSize';
 import { useParams } from 'react-router-dom';
 import { SongRankingAdBanner } from '../../adsense/AdsenseBanner';
 import CategoryTab from '../CategoryTab';
+import GradeSelector from './RankingSelector';
 
 type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const SongRankingPage: React.FC = () => {
-  const { grade } = useParams<{ grade?: string }>();
-  const [selectedGrade, setSelectedGrade] = useState(grade || 'WORLD');
+  const { grade = 'WORLD' } = useParams<{ grade: string }>();
   const [rankingSongs, setRankingSongs] = useState<RankingSongsSpDp | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +37,15 @@ const SongRankingPage: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    fetchRankingSongs(grade)
+  }, [grade]);
+
+  /**
+   * 
+   * @param grade スキル帯(75000～93000)が入るかも 
+   * @returns 
+   */
   const getActualGrade = (grade: string): string => {
     console.log('getGradeFromPath before ' + grade)
 
@@ -48,25 +56,21 @@ const SongRankingPage: React.FC = () => {
       'URANUS+++', 'URANUS++', 'URANUS+', 'URANUS'
     ]);
 
-    if (grades.has(grade)) {
+    const VALID_FLARE_SKILLS = new Set(
+      Array.from({ length: 19 }, (_, i) => (75 + i) * 1000)
+    );
+
+    if (grades.has(grade) || VALID_FLARE_SKILLS.has(Number(grade))) {
       return grade;
     }
     return 'WORLD';
   };
 
-  useEffect(() => {
-    fetchRankingSongs(selectedGrade);
-  }, [selectedGrade]);
-
-  const handleGradeChange = (grade: string) => {
-    console.log('handleGradeChange ' + grade)
-    setSelectedGrade(grade);
-  };
 
   const shareToX = () => {
-    const text = `${selectedGrade}帯対象曲ランキングをチェック！\n#DDR_FlareNote\n`;
+    const text = `${grade}帯対象曲ランキングをチェック！\n#DDR_FlareNote\n`;
     const encodedText = encodeURIComponent(text);
-    const url = encodeURIComponent(window.location.href + '/' + selectedGrade);
+    const url = encodeURIComponent(window.location.href);
     window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${url}`, '_blank');
   };
 
@@ -98,7 +102,7 @@ const SongRankingPage: React.FC = () => {
         </button>
       </div>
 
-      <GradeSelector selectedGrade={selectedGrade} onGradeChange={handleGradeChange} />
+      <GradeSelector selectedGrade={grade} />
       <Tab
         activeTab={activeTab}
         onTabChange={(tab: 'SP' | 'DP') => setActiveTab(tab)}
