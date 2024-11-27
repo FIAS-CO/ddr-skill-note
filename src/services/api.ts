@@ -61,37 +61,20 @@ export interface RankingSongsSpDp {
 }
 
 export interface RankingSongs {
-    CLASSIC: RankingSong[];
-    WHITE: RankingSong[];
-    GOLD: RankingSong[];
+    CLASSIC: CategoryData;
+    WHITE: CategoryData;
+    GOLD: CategoryData;
 }
 
-export const getRankingSongs = async (grade: string): Promise<RankingSongsSpDp> => {
+interface CategoryData {
+    songs: RankingSong[];
+    totalCount: number;
+}
+
+export const getRankingSongs = async (grade: string, page: number = 1): Promise<RankingSongsSpDp> => {
     try {
-        const response = await api.get<RankingSongsSpDp>(`/api/ranking-songs/${grade}`);
-        const data = response.data;
-
-        // Process each category and add flareSkill
-        const processCategory = (category: RankingSong[]): RankingSong[] => {
-            return category.map(song => ({
-                ...song,
-                flareSkill: calculateFlareSkill(song.level, song.flareRank)
-            })).slice(0, 50);
-        };
-
-        // Process all categories for both SP and DP
-        return {
-            SP: {
-                CLASSIC: processCategory(data.SP.CLASSIC),
-                WHITE: processCategory(data.SP.WHITE),
-                GOLD: processCategory(data.SP.GOLD)
-            },
-            DP: {
-                CLASSIC: processCategory(data.DP.CLASSIC),
-                WHITE: processCategory(data.DP.WHITE),
-                GOLD: processCategory(data.DP.GOLD)
-            }
-        };
+        const response = await api.get<RankingSongsSpDp>(`/api/ranking-songs/${grade}?page=${page}`);
+        return response.data;
     } catch (error) {
         console.error('Error fetching ranking songs:', error);
         throw error;

@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { SongRankingAdBanner } from '../../adsense/AdsenseBanner';
 import CategoryTab from '../CategoryTab';
 import GradeSelector from './RankingSelector';
+import Pagination from './Pagenation';
 
 type CategoryTabKey = 'CLASSIC' | 'WHITE' | 'GOLD';
 const SongRankingPage: React.FC = () => {
@@ -17,17 +18,18 @@ const SongRankingPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'SP' | 'DP'>('SP');
   const [activeCategoryTab, setActiveCategoryTab] = useState<CategoryTabKey>('CLASSIC');
+  const [currentPage, setCurrentPage] = useState(1);
   const { width } = useWindowSize();
   const isMobile = width < 768; // md breakpoint in Tailwind
 
-  const fetchRankingSongs = async (grade: string) => {
-    const actualGrade = getActualGrade(grade);
+  const fetchRankingSongs = async (currentGrade: string, page: number) => {
+    const actualGrade = getActualGrade(currentGrade);
 
-    console.log('fetchRankingSongs ' + actualGrade)
+    console.log(`Fetching ranking songs for grade ${actualGrade}, page ${page}`);
     setIsLoading(true);
     setError(null);
     try {
-      const data = await getRankingSongs(actualGrade);
+      const data = await getRankingSongs(actualGrade, page);
       setRankingSongs(data);
     } catch (err) {
       setError('Failed to fetch ranking songs. Please try again later.');
@@ -38,8 +40,9 @@ const SongRankingPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchRankingSongs(grade)
-  }, [grade]);
+    fetchRankingSongs(grade, 1);
+    setCurrentPage(1);
+  }, [grade, activeTab, activeCategoryTab]);
 
   /**
    * 
@@ -66,6 +69,11 @@ const SongRankingPage: React.FC = () => {
     return 'WORLD';
   };
 
+  const handlePageChange = async (newPage: number) => {
+    setCurrentPage(newPage);
+    await fetchRankingSongs(grade, newPage);
+    window.scrollTo(0, 0);
+  };
 
   const shareToX = () => {
     const text = `${grade}帯対象曲ランキングをチェック！\n#DDR_FlareNote\n`;
@@ -82,8 +90,12 @@ const SongRankingPage: React.FC = () => {
     return <div className="text-red-500">{error}</div>;
   }
 
-  const currentRankingSongs = rankingSongs ? rankingSongs[activeTab] : { CLASSIC: [], WHITE: [], GOLD: [] };
-  const currentCategorySongs = currentRankingSongs[activeCategoryTab as keyof typeof currentRankingSongs];
+  const currentRankingSongs = rankingSongs?.[activeTab];
+  const currentCategoryData = currentRankingSongs?.[activeCategoryTab as keyof typeof currentRankingSongs];
+  const currentCategorySongs = currentCategoryData?.songs;
+  const totalPages = currentCategoryData
+    ? Math.ceil(currentCategoryData.totalCount / 50)
+    : 0;
 
   return (
     <div className={`container mx-auto py-8 pt-24 sm:pt-16 ${isMobile ? 'm-0 px-0' : 'px-4'}`}>
@@ -115,6 +127,11 @@ const SongRankingPage: React.FC = () => {
         onTabChange={setActiveCategoryTab}
       />
 
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       {(!currentCategorySongs || currentCategorySongs.length === 0) ? (
         <div key={activeCategoryTab} className="mb-8">
           <h2 className="text-2xl font-bold mb-4">{activeCategoryTab}</h2>
@@ -128,6 +145,12 @@ const SongRankingPage: React.FC = () => {
           </div>
         )
       }
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
