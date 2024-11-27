@@ -74,7 +74,35 @@ interface CategoryData {
 export const getRankingSongs = async (grade: string, page: number = 1): Promise<RankingSongsSpDp> => {
     try {
         const response = await api.get<RankingSongsSpDp>(`/api/ranking-songs/${grade}?page=${page}`);
-        return response.data;
+        const data = response.data;
+
+        // Process each category and add flareSkill
+        const processCategory = (category: CategoryData): CategoryData => {
+            const processedSongs = category.songs
+                .map(song => ({
+                    ...song,
+                    flareSkill: calculateFlareSkill(song.level, song.flareRank)
+                }));
+
+            return {
+                ...category,
+                songs: processedSongs
+            };
+        };
+
+        // Process all categories for both SP and DP
+        return {
+            SP: {
+                CLASSIC: processCategory(data.SP.CLASSIC),
+                WHITE: processCategory(data.SP.WHITE),
+                GOLD: processCategory(data.SP.GOLD)
+            },
+            DP: {
+                CLASSIC: processCategory(data.DP.CLASSIC),
+                WHITE: processCategory(data.DP.WHITE),
+                GOLD: processCategory(data.DP.GOLD)
+            }
+        };
     } catch (error) {
         console.error('Error fetching ranking songs:', error);
         throw error;
