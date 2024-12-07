@@ -107,6 +107,14 @@ const HomePage: React.FC = () => {
                 </ol>
             </section>
 
+            <section className="mb-8 mt-8">
+                <h2 className="text-2xl font-bold mb-4">Special Thanks</h2>
+                <div className="flex items-center mb-4">
+                    かるびちゃん様(<a href="https://x.com/KRBMOW" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400"> @KRBMOW</a>)
+                    <span className="text-gray-700 dark:text-gray-300">- 楽曲のギミック情報をご提供いただきました。</span>
+                </div>
+            </section>
+
             <Adsense />
 
             <section>

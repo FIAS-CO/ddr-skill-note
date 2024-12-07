@@ -156,4 +156,24 @@ export const getRecentUsers = async (): Promise<UserListItem[]> => {
     return response.data;
 };
 
+export interface GimmickAndNotes {
+    hasSoflan: boolean;
+    hasStop: boolean;
+    hasShockArrow: boolean;
+    notes: number;
+    freeze: number;
+    shockArrow: number;
+}
+
+export const getGimmicksAndNotes = async (songId: string, chartType: string): Promise<GimmickAndNotes> => {
+    try {
+        const response = await api.get<GimmickAndNotes>(`/api/songs/${songId}/gimmicks/${chartType}`);
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ranking songs:', error);
+        throw error;
+    }
+}
+
 export default api;

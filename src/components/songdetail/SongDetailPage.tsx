@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getScoreDistoribution, getSongMetadata } from '../../services/api';
+import { getGimmicksAndNotes, getScoreDistoribution, getSongMetadata } from '../../services/api';
 import { useState } from 'react';
 import ScoreDistributionChart from './ScoreDistoributionChart';
 import { useCheckIsMobile } from '../../util/UseWindowSize';
 import { ChartType } from '../../types/Types';
 import { NominatedRanking } from '../../types/song';
+import { SoflanIcon, StopIcon, ShockIcon } from '../icons/DdrIcons';
 
 const VALID_CHART_TYPES = ['BESP', 'BSP', 'DSP', 'ESP', 'CSP', 'BDP', 'DDP', 'EDP', 'CDP'] as const;
 type ValidChartType = typeof VALID_CHART_TYPES[number];
@@ -54,6 +55,11 @@ const SongDetailPage: React.FC = () => {
     const [songVersion, setSongVersion] = useState<string | null>(null);
     const [songCategory, setSongCategory] = useState<string | null>(null);
     const [rankingInfo, setRankingInfo] = useState<NominatedRanking[] | null>(null);
+
+    const [hasSoflan, setHasSoflan] = useState<boolean>(false);
+    const [hasStop, setHasStop] = useState<boolean>(false);
+    const [hasShockArrow, setHasShockArrow] = useState<boolean>(false);
+
     const [exDistoribution, setExDistoribution] = useState<ScoreDistribution>();
     const [ixDistoribution, setIxDistoribution] = useState<ScoreDistribution>();
     const [error2, setError] = useState<string | null>(null);
@@ -90,8 +96,11 @@ const SongDetailPage: React.FC = () => {
             setError(null);
             try {
 
-                const metadata = await getSongMetadata(songId, chartType as ChartType)
-                const distoribution = await getScoreDistoribution(songId, chartType);
+                const [metadata, distoribution, gimmicksAndNotes] = await Promise.all([
+                    getSongMetadata(songId, chartType as ChartType),
+                    getScoreDistoribution(songId, chartType),
+                    getGimmicksAndNotes(songId, chartType)
+                ]);
 
                 setSongName(metadata.name);
                 setSongLevel(metadata.level);
@@ -99,6 +108,10 @@ const SongDetailPage: React.FC = () => {
                 setSongVersion(metadata.version)
                 setSongCategory(metadata.category)
                 setRankingInfo(metadata.nominatedRanking)
+
+                setHasSoflan(gimmicksAndNotes.hasSoflan);
+                setHasStop(gimmicksAndNotes.hasStop);
+                setHasShockArrow(gimmicksAndNotes.hasShockArrow);
 
                 setExDistoribution(distoribution.scoreDistributions.EX);
                 setIxDistoribution(distoribution.scoreDistributions.IX);
@@ -156,6 +169,17 @@ const SongDetailPage: React.FC = () => {
                             <li>
                                 <span className="font-medium">カテゴリ:</span> {songCategory}
                             </li>
+                            <li className="flex items-center gap-2">
+                                <span className="font-medium">ギミック:</span>
+                                <div className="flex gap-1">
+                                    {hasSoflan && <SoflanIcon size={20} />}
+                                    {hasStop && <StopIcon size={20} />}
+                                    {hasShockArrow && <ShockIcon size={20} />}
+                                    {!hasSoflan && !hasStop && !hasShockArrow &&
+                                        <span>なし</span>
+                                    }
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div>
@@ -194,3 +218,4 @@ const SongDetailPage: React.FC = () => {
 };
 
 export default SongDetailPage;
+
