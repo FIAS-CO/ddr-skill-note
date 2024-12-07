@@ -171,14 +171,20 @@ const SongDetailPage: React.FC = () => {
                             </li>
                             <li className="flex items-center gap-2">
                                 <span className="font-medium">ギミック:</span>
-                                <div className="flex gap-1">
-                                    {hasSoflan && <SoflanIcon size={20} />}
-                                    {hasStop && <StopIcon size={20} />}
-                                    {hasShockArrow && <ShockIcon size={20} />}
-                                    {!hasSoflan && !hasStop && !hasShockArrow &&
-                                        <span>なし</span>
-                                    }
-                                </div>
+                                {(!songLevel || songLevel <= 12) ? (
+                                    <div className="flex gap-1">
+                                        <span>No data</span>
+                                    </div>
+                                ) : (
+                                    <div className="flex gap-1">
+                                        {hasSoflan && <SoflanIcon size={20} />}
+                                        {hasStop && <StopIcon size={20} />}
+                                        {hasShockArrow && <ShockIcon size={20} />}
+                                        {!hasSoflan && !hasStop && !hasShockArrow &&
+                                            <span>なし</span>
+                                        }
+                                    </div>
+                                )}
                             </li>
                         </ul>
                     </div>
