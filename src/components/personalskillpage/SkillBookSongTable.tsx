@@ -4,6 +4,7 @@ import { SkillBookSong } from './SkillBookSongRow';
 import useWindowSize from '../../util/UseWindowSize';
 import { getChartTypeBackgroundClass, convertToFlareRankString } from '../../util/DdrDefinitionUtil';
 import { Link } from 'react-router-dom';
+import { JacketImage } from '../ui_component/UIComponent';
 
 interface SkillBookSongTableProps {
     songs: SkillBookSong[];
@@ -26,18 +27,21 @@ const SkillBookSongTable: React.FC<SkillBookSongTableProps> = ({ songs }) => {
             key: 'title',
             sortable: true,
             render: (song) => (
-                <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm group relative">
-                    <Link
-                        to={`/song-detail/${song.id}/${song.chartType}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="break-words whitespace-normal hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-200 border-b border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors duration-300"
-                    >
-                        {song.title}
-                    </Link>
-                    <span className="absolute top-full left-0 mt-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                        統計情報を見る
-                    </span>
+                <div className="flex items-center space-x-2">
+                    <JacketImage songId={song.id} />
+                    <div className="font-medium text-gray-900 dark:text-white text-xs md:text-sm group relative">
+                        <Link
+                            to={`/song-detail/${song.id}/${song.chartType}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="break-words whitespace-normal hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-200 border-b border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors duration-300"
+                        >
+                            {song.title}
+                        </Link>
+                        <span className="absolute top-full left-0 mt-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            統計情報を見る
+                        </span>
+                    </div>
                 </div>
             ),
             className: 'w-[35%] px-0 md:px-2 text-left'
