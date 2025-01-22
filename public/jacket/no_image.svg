@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- 背景 -->
+  <rect width="200" height="200" fill="#E5E7EB"/>
+  
+  <!-- 画像アイコン -->
+  <path d="M60 70 h80 v60 h-80 z" fill="none" stroke="#9CA3AF" stroke-width="8"/>
+  <circle cx="80" cy="90" r="8" fill="#9CA3AF"/>
+  <path d="M70 120 L90 100 L110 120 L130 95 v25 h-60" fill="none" stroke="#9CA3AF" stroke-width="8" stroke-linejoin="round"/>
+</svg>
